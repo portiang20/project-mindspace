@@ -1,3 +1,7 @@
+## Clone this project to your computer (After installing git)
+
+    git clone https://github.cs.adelaide.edu.au/MCI-Projects-2021/Team-024.git
+
 ## Push to github
 
 1.  Commit the current work
