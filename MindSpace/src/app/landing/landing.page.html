@@ -4,39 +4,25 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <!--Image goes here-->
+<ion-content class="card-background-page">
 
-  <ion-grid class="center">
-    <ion-card>
-      <ion-row>
-        <ion-img src="../../assets/background.jpg"></ion-img>
-      </ion-row>
-    </ion-card>
-    <ion-row>
-      <ion-col>
-        <ion-text color="white">
-          <h3>Welcome to the </h3>
-          <h1><strong>MindSpace</strong></h1>
-          <p>A 'fitbit' for your language</p>
-        </ion-text>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <!-- <ion-button color="primary" (click)="onClickSignUp()">SIGN UP</ion-button> -->
-        <!-- <ion-button color="primary" routerLink="/signup">SIGN UP</ion-button> -->
-        <ion-button color="success" expand="full" shape="round" [routerLink]="['/',pageName]">SIGN UP</ion-button>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <ion-text>Already have an account?
-          <span class="loginBtn" (click)="onClickLogin()">Log in</span>
-        </ion-text>
-      </ion-col>
-    </ion-row>
+  <ion-card>
+    <!--Image goes here-->
+    <img src="../../assets/background.jpg" />
+    <div class="card-title">
+      <h3>Welcome to the</h3>
+      <h1><strong>MindSpace</strong></h1>
+    </div>
+    <div class="card-subtitle">A 'fitbit' for your language</div>
 
-  </ion-grid>
+  </ion-card>
+
+  <!-- <ion-button color="primary" (click)="onClickSignUp()">SIGN UP</ion-button> -->
+  <!-- <ion-button color="primary" routerLink="/signup">SIGN UP</ion-button> -->
+  <ion-button color="success" expand="full" shape="round" [routerLink]="['/',pageName]">SIGN UP</ion-button>
+
+  <ion-text>Already have an account?
+    <span class="loginBtn" (click)="onClickLogin()">Log in</span>
+  </ion-text>
 
 </ion-content>
