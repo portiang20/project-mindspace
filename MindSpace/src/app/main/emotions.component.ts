@@ -1,14 +1,13 @@
-import { EmotionsComponent } from './emotions.component';
-import { Injectable, Input } from '@angular/core';
 import { Emotion } from './emotion.model';
+import { Component, Input, OnInit } from '@angular/core';
 
-@Injectable({
-  providedIn: 'root',
+@Component({
+  selector: 'app-emotions',
+  templateUrl: './emotions.component.html',
+  styleUrls: ['./emotions.component.scss'],
 })
-export class EmotionsService {
-  emotionsList: Emotion[];
-  // TODO: 1 read data 2 category into type 3 sort by times
-  private _emotions: Emotion[] = [
+export class EmotionsComponent implements OnInit {
+  emotionsList: Emotion[] = [
     { id: 'e1', type: 'happy', name: 'Excitement', times: 23 },
     { id: 'e2', type: 'happy', name: 'Peace', times: 18 },
     { id: 'e3', type: 'sad', name: 'Disappointment', times: 14 },
@@ -17,10 +16,7 @@ export class EmotionsService {
     { id: 'e6', type: 'fear', name: 'Panic', times: 9 },
     { id: 'e7', type: 'disgust', name: 'Dislike', times: 6 },
   ];
-
-  get emotions() {
-    return [...this._emotions];
-  }
-
   constructor() {}
+
+  ngOnInit() {}
 }

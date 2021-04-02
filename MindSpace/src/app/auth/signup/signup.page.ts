@@ -7,9 +7,18 @@ import { Router } from '@angular/router';
   styleUrls: ['./signup.page.scss'],
 })
 export class SignupPage implements OnInit {
-  constructor(private route: Router) {}
+  constructor(private route: Router) {
+    
+  }
 
   ngOnInit() {}
+
+  // TODO:buggy when change segments back and force between login and sign up
+  segmentChanged(e: any) {
+    if (e.detail.value == 'login') {
+      this.route.navigateByUrl('/login');
+    }
+  }
 
   onClickFacebook() {
     console.log('click on FaceBook auth');
@@ -17,10 +26,7 @@ export class SignupPage implements OnInit {
   onClickGoogle() {
     console.log('click on Google auth');
   }
-  onClickSignUp() {
+  onClickSignUpBtn() {
     console.log('click on sign up button');
-  }
-  onClickLogin() {
-    console.log('click on log in');
   }
 }

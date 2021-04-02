@@ -7,17 +7,15 @@ import { Router } from '@angular/router';
   styleUrls: ['./landing.page.scss'],
 })
 export class LandingPage implements OnInit {
-  pageName = 'signup';
-
   constructor(private route: Router) {}
 
   ngOnInit() {}
 
   onClickSignUp() {
-    this.route.navigateByUrl('/signup');
+    this.route.navigateByUrl('auth');
   }
 
   onClickLogin() {
-    this.route.navigateByUrl('/login');
+    this.route.navigateByUrl('auth');
   }
 }

@@ -1,0 +1,91 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title routerLink='/main/tabs/home'>MindSpace</ion-title>
+  </ion-toolbar>
+  <!-- nav between login and sign up -->
+  <ion-toolbar>
+    <ion-segment [(ngModel)]="switch">
+      <ion-segment-button value="login">
+        <ion-label>Log In</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="signup">
+        <ion-label>Sign Up</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="auth-page">
+  <ion-button color="success" (click)="onClickFacebook()" expand="block" shape="round">
+    <ion-icon name="logo-facebook"></ion-icon>
+    CONTINUE WITH FACEBOOK
+  </ion-button>
+
+  <ion-button color="success" (click)="onClickGoogle()" expand="block" shape="round">
+    <ion-icon name="logo-google"></ion-icon>
+    CONTINUE WITH GOOGLE
+  </ion-button>
+
+  <div [ngSwitch]="switch">
+    <ion-list *ngSwitchCase="'login'">
+      <ion-text>OR LOGIN WITH EMAIL</ion-text>
+
+      <ion-item>
+        <ion-label position="floating">Email Address</ion-label>
+        <ion-input type="text"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Password</ion-label>
+        <ion-input type="password"></ion-input>
+      </ion-item>
+
+      <ion-button color="success" (click)="onClickLoginBtn()" expand="block" shape="round">
+        LOGIN
+      </ion-button>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'signup'">
+      <ion-text>OR SIGN UP WITH EMAIL</ion-text>
+
+      <!-- Inputs with labels -->
+      <ion-item>
+        <ion-label position="floating">Your Name</ion-label>
+        <ion-input type="text"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Email Address</ion-label>
+        <ion-input type="text"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Password</ion-label>
+        <ion-input type="password"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating"> Repeat Password</ion-label>
+        <ion-input type="password"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-checkbox checked color="success"> </ion-checkbox>
+        <p>
+          <ion-text>
+            I have read the
+          </ion-text>
+          <ion-text color="success">
+            privacy policy
+          </ion-text>
+        </p>
+      </ion-item>
+
+
+      <ion-button color="success" (click)="onClickSignUp()" routerLink="/main/tabs/home" expand="block" shape="round">
+        SIGN UP
+      </ion-button>
+
+    </ion-list>
+  </div>
+</ion-content>

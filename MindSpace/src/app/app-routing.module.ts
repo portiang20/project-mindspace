@@ -12,20 +12,25 @@ const routes: Routes = [
     loadChildren: () =>
       import('./landing/landing.module').then((m) => m.LandingPageModule),
   },
-  {
-    path: 'login',
-    loadChildren: () =>
-      import('./auth/login/login.module').then((m) => m.LoginPageModule),
-  },
-  {
-    path: 'signup',
-    loadChildren: () =>
-      import('./auth/signup/signup.module').then((m) => m.SignupPageModule),
-  },
+  // {
+  //   path: 'login',
+  //   loadChildren: () =>
+  //     import('./auth/login/login.module').then((m) => m.LoginPageModule),
+  // },
+  // {
+  //   path: 'signup',
+  //   loadChildren: () =>
+  //     import('./auth/signup/signup.module').then((m) => m.SignupPageModule),
+  // },
   {
     path: 'main',
     loadChildren: () =>
       import('./main/main.module').then((m) => m.MainPageModule),
+  },
+  {
+    path: 'auth',
+    loadChildren: () =>
+      import('./auth/auth/auth.module').then((m) => m.AuthPageModule),
   },
 ];
 

@@ -1,3 +1,4 @@
+import { Emotion } from './main/emotion.model';
 import { Component } from '@angular/core';
 
 @Component({

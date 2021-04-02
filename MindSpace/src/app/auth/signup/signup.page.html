@@ -4,18 +4,18 @@
   </ion-toolbar>
   <!-- nav bar -->
   <ion-toolbar>
-    <ion-segment value="signup">
-      <ion-segment-button value="login" routerLink="/login">
+    <ion-segment (ionChange)="segmentChanged($event)" id="switchBtn" value="signup">
+      <ion-segment-button value="login">
         Log In
       </ion-segment-button>
-      <ion-segment-button value="signup" routerLink="/signup">
+      <ion-segment-button value="signup">
         Sign Up
       </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="signup-page">
+<ion-content class=" signup-page">
   <ion-button color="success" (click)="onClickFacebook()" routerLink="/main/tabs/home" expand="block" shape="round">
     <ion-icon name="logo-facebook"></ion-icon>
     CONTINUE WITH FACEBOOK

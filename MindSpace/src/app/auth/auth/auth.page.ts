@@ -3,20 +3,15 @@ import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.page.html',
-  styleUrls: ['./login.page.scss'],
+  selector: 'app-auth',
+  templateUrl: './auth.page.html',
+  styleUrls: ['./auth.page.scss'],
 })
-export class LoginPage implements OnInit {
+export class AuthPage implements OnInit {
+  switch: string = 'login';
   constructor(public alertController: AlertController, private route: Router) {}
 
   ngOnInit() {}
-
-  segmentChanged(e: any) {
-    if (e.detail.value == 'signup') {
-      this.route.navigateByUrl('/signup');
-    }
-  }
 
   onClickFacebook() {
     console.log('click on FaceBook auth');
