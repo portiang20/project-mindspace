@@ -1,13 +1,43 @@
-.orangeDot {
-  height: 10px;
-  width: 10px;
-  border-radius: 50%;
-  background-color: orange;
+.home-page {
+  text-align: center;
+  margin: auto;
 }
 
-.blueDot {
+.dot {
   height: 10px;
   width: 10px;
   border-radius: 50%;
-  background-color: blue;
+  background-color: grey;
+
+  #happyDot {
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    background-color: orange;
+  }
+
+  #sadDot {
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    background-color: blue;
+  }
+  #angerDot {
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    background-color: red;
+  }
+  #fearDot {
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    background-color: plum;
+  }
+  #disgustDot {
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    background-color: lightseagreen;
+  }
 }

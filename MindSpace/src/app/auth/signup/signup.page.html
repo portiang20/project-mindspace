@@ -2,32 +2,31 @@
   <ion-toolbar>
     <ion-title routerLink='/main/tabs/home'>MindSpace</ion-title>
   </ion-toolbar>
+  <!-- nav bar -->
   <ion-toolbar>
     <ion-segment value="signup">
       <ion-segment-button value="login" routerLink="/login">
         Log In
       </ion-segment-button>
-      <ion-segment-button value="signup">
+      <ion-segment-button value="signup" routerLink="/signup">
         Sign Up
       </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
-
 </ion-header>
-<ion-content class="center">
-  <br />
+
+<ion-content class="signup-page">
   <ion-button color="success" (click)="onClickFacebook()" routerLink="/main/tabs/home" expand="block" shape="round">
     <ion-icon name="logo-facebook"></ion-icon>
     CONTINUE WITH FACEBOOK
   </ion-button>
-  <br />
+
   <ion-button color="success" (click)="onClickGoogle()" routerLink="/main/tabs/home" expand="block" shape="round">
     <ion-icon name="logo-google"></ion-icon>
     CONTINUE WITH GOOGLE
   </ion-button>
-  <br />
-  <ion-text>OR SIGN UP WITH EMAIL</ion-text>
 
+  <ion-text>OR SIGN UP WITH EMAIL</ion-text>
 
   <!-- Inputs with labels -->
   <ion-item>

@@ -8,6 +8,8 @@ import { EmotionsService } from '../emotions.service';
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
+  // TODO: need update from register name
+  name: string = 'Emily';
   loadedEmotions: Emotion[];
 
   constructor(private emotionsService: EmotionsService) {}

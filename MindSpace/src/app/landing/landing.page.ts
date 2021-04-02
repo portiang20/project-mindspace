@@ -14,10 +14,10 @@ export class LandingPage implements OnInit {
   ngOnInit() {}
 
   onClickSignUp() {
-    this.route.navigate(['/', 'signup']);
+    this.route.navigateByUrl('/signup');
   }
 
   onClickLogin() {
-    this.route.navigate(['/', 'login']);
+    this.route.navigateByUrl('/login');
   }
 }

@@ -4,17 +4,29 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <!--
+<ion-content class="home-page">
+  <ion-text>
+    <h2>Hi, {{name}}</h2>
+    <h3>Today you feel</h3>
+    <p>(Below is a demo map using picture)</p>
+  </ion-text>
+  <ion-img src="../../assets/five_emotions.jpg"></ion-img>
+  <!-- emotion map end -->
+
+  <ion-text>
+    Scroll to show all emotions
+  </ion-text>
   <ion-list>
     <ion-item *ngFor="let e of loadedEmotions">
-      <div slot="start">
-        <div *ngIf="e.type=='happy'" class="orangeDot"></div>
-        <div *ngIf="e.type=='sad'" class="blueDot"></div>
-        <ion-text>{{e.name}}</ion-text>
+      <div class="dot" slot="start">
+        <div *ngIf="e.type=='happy'" id="happyDot"></div>
+        <div *ngIf="e.type=='sad'" id="sadDot"></div>
+        <div *ngIf="e.type=='anger'" id="angerDot"></div>
+        <div *ngIf="e.type=='fear'" id="fearDot"></div>
+        <div *ngIf="e.type=='disgust'" id="disgustDot"></div>
       </div>
+      <ion-text routerLink="./explore">{{e.name}}</ion-text>
       <ion-text slot="end">{{e.times}} times</ion-text>
     </ion-item>
   </ion-list>
-  -->
 </ion-content>

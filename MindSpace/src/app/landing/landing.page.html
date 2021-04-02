@@ -4,8 +4,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="card-background-page">
-
+<ion-content class="landing-page">
   <ion-card>
     <!--Image goes here-->
     <img src="../../assets/background.jpg" />
@@ -22,7 +21,7 @@
   <ion-button color="success" expand="full" shape="round" [routerLink]="['/',pageName]">SIGN UP</ion-button>
 
   <ion-text>Already have an account?
-    <span class="loginBtn" (click)="onClickLogin()">Log in</span>
+    <ion-text color="success" class="loginLink" (click)="onClickLogin()">Log in</ion-text>
   </ion-text>
 
 </ion-content>
