@@ -16,6 +16,7 @@
   <ion-text>
     Scroll to show all emotions
   </ion-text>
+  <!-- emotion list start-->
   <ion-list>
     <ion-item *ngFor="let e of loadedEmotions">
       <div class="dot" slot="start">
@@ -29,4 +30,6 @@
       <ion-text slot="end">{{e.times}} times</ion-text>
     </ion-item>
   </ion-list>
+  <!-- emotion list end-->
+
 </ion-content>
