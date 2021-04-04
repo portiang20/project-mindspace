@@ -7,9 +7,10 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { NotfoundComponent } from './notfound/notfound.component';
 
 @NgModule({
-  declarations: [AppComponent, AlertComponent],
+  declarations: [AppComponent, AlertComponent, NotfoundComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
   providers: [

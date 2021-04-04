@@ -26,8 +26,8 @@
         <div *ngIf="e.type=='fear'" id="fearDot"></div>
         <div *ngIf="e.type=='disgust'" id="disgustDot"></div>
       </div>
-      <!-- TODO:fix url link -->
-      <ion-text routerLink="../explore">{{e.name}}</ion-text>
+      <!-- url link -> explore/emotion.name-->
+      <ion-text [routerLink]="['../explore', e.name]">{{e.name}}</ion-text>
       <ion-text slot="end">{{e.times}} times</ion-text>
     </ion-item>
   </ion-list>

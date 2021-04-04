@@ -14,6 +14,11 @@ const routes: Routes = [
     component: MainPage,
     children: [
       {
+        path: 'explore/:id',
+        loadChildren: () =>
+          import('./explore/explore.module').then((m) => m.ExplorePageModule),
+      },
+      {
         path: 'explore',
         loadChildren: () =>
           import('./explore/explore.module').then((m) => m.ExplorePageModule),
