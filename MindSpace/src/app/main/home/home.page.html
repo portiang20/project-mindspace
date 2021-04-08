@@ -1,36 +1,70 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title routerLink='/main/tabs/home'>MindSpace</ion-title>
-  </ion-toolbar>
-</ion-header>
+  <ion-header>
+    <ion-toolbar>
+      <ion-title routerLink='/main/tabs/home'>MindSpace</ion-title>
+    </ion-toolbar>
+  </ion-header>
 
-<ion-content class="home-page">
-  <ion-text>
-    <h2>Hi, {{name}}</h2>
-    <h3>Today you feel</h3>
-    <p>(Below is a demo map using picture)</p>
-  </ion-text>
-  <ion-img src="../../assets/five_emotions.jpg"></ion-img>
-  <!-- emotion map end -->
+  <ion-content>
+    <div class="home-page">
+      <ion-text>
+        <h2>Hi, {{name}}</h2>
+        <h3>Today you feel</h3>
+        <p>(Below is a demo map using picture)</p>
+      </ion-text>
+    </div>
 
-  <ion-text>
-    Scroll to show all emotions
-  </ion-text>
-  <!-- emotion list start-->
-  <ion-list>
-    <ion-item *ngFor="let e of loadedEmotions">
-      <div class="dot" slot="start">
-        <div *ngIf="e.type=='happy'" id="happyDot"></div>
-        <div *ngIf="e.type=='sad'" id="sadDot"></div>
-        <div *ngIf="e.type=='anger'" id="angerDot"></div>
-        <div *ngIf="e.type=='fear'" id="fearDot"></div>
-        <div *ngIf="e.type=='disgust'" id="disgustDot"></div>
+    <div class="bigFrame">
+      <div id="happyFrame">
+        <ion-img src="../../assets/yellow.png"></ion-img>
       </div>
-      <!-- url link -> explore/emotion.name-->
-      <ion-text [routerLink]="['../explore', e.name]">{{e.name}}</ion-text>
-      <ion-text slot="end">{{e.times}} times</ion-text>
-    </ion-item>
-  </ion-list>
-  <!-- emotion list end-->
 
-</ion-content>
+      <div id="sadFrame">
+        <ion-img src="../../assets/blue.png"></ion-img>
+      </div>
+
+      <div id="angerFrame">
+        <ion-img src="../../assets/red.png"></ion-img>
+      </div>
+
+      <div id="disgustFrame">
+        <ion-img src="../../assets/green.png"></ion-img>
+      </div>
+
+      <div id="fearFrame">
+        <ion-img src="../../assets/purple.png"></ion-img>
+      </div>
+    </div>
+
+      <!-- emotion map end -->
+
+    <div>
+      <ion-text>
+        Scroll to show all emotions
+      </ion-text>
+      <!-- emotion list start-->
+      <ion-list>
+        <ion-item *ngFor="let e of loadedEmotions">
+          <div class="dot" slot="start">
+            <div *ngIf="e.type=='happy'" id="happyDot"></div>
+            <div *ngIf="e.type=='sad'" id="sadDot"></div>
+            <div *ngIf="e.type=='anger'" id="angerDot"></div>
+            <div *ngIf="e.type=='fear'" id="fearDot"></div>
+            <div *ngIf="e.type=='disgust'" id="disgustDot"></div>
+          </div>
+          <!-- url link -> explore/emotion.name-->
+          <ion-text [routerLink]="['../explore', e.name]">{{e.name}}</ion-text>
+          <ion-text slot="end">{{e.times}} times</ion-text>
+        </ion-item>
+      </ion-list>
+      <!-- emotion list end-->
+    </div>
+  </ion-content>
+
+
+
+
+
+
+
+
+
