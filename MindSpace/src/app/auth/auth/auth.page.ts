@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-auth',
@@ -9,22 +10,17 @@ import { AlertController } from '@ionic/angular';
 })
 export class AuthPage implements OnInit {
   switch: string = 'login';
-  constructor(public alertController: AlertController, private route: Router) {}
+  constructor(
+    public alertController: AlertController,
+    private route: Router,
+    public authService: AuthService
+  ) {}
 
   ngOnInit() {}
 
-  onClickFacebook() {
-    console.log('click on FaceBook auth');
-  }
-
-  onClickGoogle() {
-    console.log('click on Google auth');
-  }
-
-  onClickLoginBtn() {
-    console.log('check account info');
-    this.presentAlert();
-  }
+  // onClickFacebook() {
+  //   console.log('click on FaceBook auth');
+  // }
 
   async presentAlert() {
     const alert = await this.alertController.create({

@@ -16,12 +16,12 @@
 </ion-header>
 
 <ion-content class="auth-page">
-  <ion-button color="success" (click)="onClickFacebook()" expand="block" shape="round">
+  <!-- <ion-button color="success" (click)="onClickFacebook()" expand="block" shape="round">
     <ion-icon name="logo-facebook"></ion-icon>
     CONTINUE WITH FACEBOOK
-  </ion-button>
+  </ion-button> -->
 
-  <ion-button color="success" (click)="onClickGoogle()" expand="block" shape="round">
+  <ion-button color="success" (click)="authService.GoogleAuth()" expand="block" shape="round">
     <ion-icon name="logo-google"></ion-icon>
     CONTINUE WITH GOOGLE
   </ion-button>
@@ -32,17 +32,22 @@
 
       <ion-item>
         <ion-label position="floating">Email Address</ion-label>
-        <ion-input type="text"></ion-input>
+        <ion-input type="text" #userName required></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label position="floating">Password</ion-label>
-        <ion-input type="password"></ion-input>
+        <ion-input type="password" #userPassword required></ion-input>
       </ion-item>
 
-      <ion-button color="success" (click)="onClickLoginBtn()" expand="block" shape="round">
+      <ion-button color="success" (click)="authService.SignIn(userName.value, userPassword.value)" expand="block"
+        shape="round">
         LOGIN
       </ion-button>
+
+      <ion-item class="forgotPassword">
+        <span routerLink="/auth/forgot-password">Forgot Password?</span>
+      </ion-item>
     </ion-list>
 
     <ion-list *ngSwitchCase="'signup'">
@@ -51,12 +56,12 @@
       <!-- Inputs with labels -->
       <ion-item>
         <ion-label position="floating">Your Name</ion-label>
-        <ion-input type="text"></ion-input>
+        <ion-input type="text" #userName required></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label position="floating">Email Address</ion-label>
-        <ion-input type="text"></ion-input>
+        <ion-input type="text" #signUpName required></ion-input>
       </ion-item>
 
       <ion-item>
@@ -66,7 +71,7 @@
 
       <ion-item>
         <ion-label position="floating"> Repeat Password</ion-label>
-        <ion-input type="password"></ion-input>
+        <ion-input type="password" #userPwd></ion-input>
       </ion-item>
 
       <ion-item>
@@ -81,8 +86,9 @@
         </p>
       </ion-item>
 
-
-      <ion-button color="success" (click)="onClickSignUp()" routerLink="/main/tabs/home" expand="block" shape="round">
+      <!-- routerLink="/main/tabs/home"  -->
+      <ion-button color="success" (click)="authService.SignUp(userName.value,signUpName.value, userPwd.value)"
+        expand="block" shape="round">
         SIGN UP
       </ion-button>
 
