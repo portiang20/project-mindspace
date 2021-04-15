@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
 import { AuthPage } from './auth.page';
 import { DashboardComponent } from '../dashboard/dashboard.component';
 import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component';

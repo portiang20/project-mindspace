@@ -35,12 +35,12 @@ export class AuthService {
   }
 
   // Sign in with Google
-  GoogleAuth() {
-    return this.AuthLogin(new auth.GoogleAuthProvider());
+  googleAuth(): Promise<void> {
+    return this.authLogin(new auth.GoogleAuthProvider());
   }
 
   // Auth logic to run auth providers : Google
-  AuthLogin(provider) {
+  authLogin(provider): Promise<void> {
     return this.afAuth.auth
       .signInWithPopup(provider)
       .then((result) => {
@@ -48,22 +48,30 @@ export class AuthService {
           this.router.navigate(['dashboard']);
           // this.router.navigate(['main']);
         });
-        this.SetUserData(result.user);
+
+        this.getToken(result);
+        this.setUserData(result.user);
       })
       .catch((error) => {
         window.alert(error);
       });
   }
 
+  // return google auth idToken for the use of Django
+  getToken(result) {
+    console.log('Credential:', result.credential.idToken);
+    return result.credential.idToken;
+  }
+
   // Sign in with email/password
-  SignIn(email, password) {
+  signIn(email, password) {
     return this.afAuth.auth
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
         this.ngZone.run(() => {
           this.router.navigate(['dashboard']);
         });
-        this.SetUserData(result.user, result.user.displayName);
+        this.setUserData(result.user, result.user.displayName);
       })
       .catch((error) => {
         window.alert(error.message);
@@ -71,15 +79,15 @@ export class AuthService {
   }
 
   // Sign up with email/password TODO: save user name
-  SignUp(username, email, password) {
+  signUp(username, email, password) {
     return this.afAuth.auth
       .createUserWithEmailAndPassword(email, password)
       .then((result) => {
-        /* Call the SendVerificaitonMail() function when new user sign
+        /* Call the sendVerificaitonMail() function when new user sign
         up and returns promise */
-        this.SendVerificationMail();
+        this.sendVerificationMail();
 
-        this.SetUserData(result.user, username);
+        this.setUserData(result.user, username);
       })
       .catch((error) => {
         window.alert(error.message);
@@ -87,14 +95,14 @@ export class AuthService {
   }
 
   // Send email verfificaiton when new user sign up
-  SendVerificationMail() {
+  sendVerificationMail() {
     return this.afAuth.auth.currentUser.sendEmailVerification().then(() => {
       this.router.navigate(['auth', 'verify-email-address']);
     });
   }
 
   // Reset Forggot password
-  ForgotPassword(passwordResetEmail) {
+  forgotPassword(passwordResetEmail) {
     return this.afAuth.auth
       .sendPasswordResetEmail(passwordResetEmail)
       .then(() => {
@@ -115,7 +123,7 @@ export class AuthService {
   // sign up with username/password and sign in with social auth
   sign up with username/password and sign in with social auth
   provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */
-  SetUserData(user, username?) {
+  setUserData(user, username?) {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(
       `users/${user.uid}`
     );
@@ -132,7 +140,7 @@ export class AuthService {
   }
 
   // Sign out
-  SignOut() {
+  signOut() {
     return this.afAuth.auth.signOut().then(() => {
       localStorage.removeItem('user');
       this.router.navigate(['landing']);
