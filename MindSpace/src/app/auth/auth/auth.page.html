@@ -21,7 +21,7 @@
     CONTINUE WITH FACEBOOK
   </ion-button> -->
 
-  <ion-button color="success" (click)="authService.GoogleAuth()" expand="block" shape="round">
+  <ion-button color="success" expand="block" shape="round" (click)="authService.GoogleAuth()">
     <ion-icon name="logo-google"></ion-icon>
     CONTINUE WITH GOOGLE
   </ion-button>
@@ -66,13 +66,13 @@
 
       <ion-item>
         <ion-label position="floating">Password</ion-label>
-        <ion-input type="password"></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label position="floating"> Repeat Password</ion-label>
         <ion-input type="password" #userPwd></ion-input>
       </ion-item>
+
+      <!-- <ion-item>
+        <ion-label position="floating"> Repeat Password</ion-label>
+        <ion-input type="password" #repeatPwd></ion-input>
+      </ion-item> -->
 
       <ion-item>
         <ion-checkbox checked color="success"> </ion-checkbox>
@@ -86,12 +86,11 @@
         </p>
       </ion-item>
 
+      <!-- TODO:Eric sign up function using django database -->
       <!-- routerLink="/main/tabs/home"  -->
-      <ion-button color="success" (click)="authService.SignUp(userName.value,signUpName.value, userPwd.value)"
-        expand="block" shape="round">
-        SIGN UP
+      <ion-button color="success" (click)="authService.SignUp(userName.value, signUpName.value, userPwd.value)"
+        expand="block" shape="round"> SIGN UP
       </ion-button>
-
     </ion-list>
   </div>
 </ion-content>

@@ -10,8 +10,8 @@ import { NotfoundComponent } from './notfound/notfound.component';
 
 // App components
 import { AppComponent } from './app.component';
-import { SignInComponent } from './auth/sign-in/sign-in.component';
-import { SignUpComponent } from './auth/sign-up/sign-up.component';
+// import { SignInComponent } from './auth/sign-in/sign-in.component';
+// import { SignUpComponent } from './auth/sign-up/sign-up.component';
 import { DashboardComponent } from './auth/dashboard/dashboard.component';
 import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
 import { VerifyEmailComponent } from './auth/verify-email/verify-email.component';
@@ -31,8 +31,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     AppComponent,
     AlertComponent,
     NotfoundComponent,
-    SignInComponent,
-    SignUpComponent,
+    // SignInComponent,
+    // SignUpComponent,
     DashboardComponent,
     ForgotPasswordComponent,
     VerifyEmailComponent,

@@ -34,15 +34,36 @@ export class AuthService {
     });
   }
 
+  // Sign in with Google
+  GoogleAuth() {
+    return this.AuthLogin(new auth.GoogleAuthProvider());
+  }
+
+  // Auth logic to run auth providers : Google
+  AuthLogin(provider) {
+    return this.afAuth.auth
+      .signInWithPopup(provider)
+      .then((result) => {
+        this.ngZone.run(() => {
+          this.router.navigate(['dashboard']);
+          // this.router.navigate(['main']);
+        });
+        this.SetUserData(result.user);
+      })
+      .catch((error) => {
+        window.alert(error);
+      });
+  }
+
   // Sign in with email/password
   SignIn(email, password) {
     return this.afAuth.auth
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
         this.ngZone.run(() => {
-          this.router.navigate(['auth', 'dashboard']);
+          this.router.navigate(['dashboard']);
         });
-        this.SetUserData(result.user);
+        this.SetUserData(result.user, result.user.displayName);
       })
       .catch((error) => {
         window.alert(error.message);
@@ -57,7 +78,8 @@ export class AuthService {
         /* Call the SendVerificaitonMail() function when new user sign
         up and returns promise */
         this.SendVerificationMail();
-        this.SetUserData(result.user);
+
+        this.SetUserData(result.user, username);
       })
       .catch((error) => {
         window.alert(error.message);
@@ -89,37 +111,18 @@ export class AuthService {
     return user !== null && user.emailVerified !== false ? true : false;
   }
 
-  // Sign in with Google
-  GoogleAuth() {
-    return this.AuthLogin(new auth.GoogleAuthProvider());
-  }
-
-  // Auth logic to run auth providers
-  AuthLogin(provider) {
-    return this.afAuth.auth
-      .signInWithPopup(provider)
-      .then((result) => {
-        this.ngZone.run(() => {
-          this.router.navigate(['auth', 'dashboard']);
-        });
-        this.SetUserData(result.user);
-      })
-      .catch((error) => {
-        window.alert(error);
-      });
-  }
-
   /* Setting up user data when sign in with username/password,
+  // sign up with username/password and sign in with social auth
   sign up with username/password and sign in with social auth
   provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */
-  SetUserData(user) {
+  SetUserData(user, username?) {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(
       `users/${user.uid}`
     );
     const userData: User = {
       uid: user.uid,
       email: user.email,
-      displayName: user.displayName,
+      displayName: user.displayName || username,
       photoURL: user.photoURL,
       emailVerified: user.emailVerified,
     };
@@ -132,7 +135,7 @@ export class AuthService {
   SignOut() {
     return this.afAuth.auth.signOut().then(() => {
       localStorage.removeItem('user');
-      this.router.navigate(['auth']);
+      this.router.navigate(['landing']);
     });
   }
 }
