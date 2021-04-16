@@ -44,11 +44,17 @@
         shape="round">
         LOGIN
       </ion-button>
-
-      <ion-item class="forgotPassword">
-        <span routerLink="/auth/forgot-password">Forgot Password?</span>
-      </ion-item>
     </ion-list>
+    <div>
+      <ion-text color="success" routerLink="/auth/forgot-password">Forgot Password?
+      </ion-text>
+    </div>
+    <br />
+    <div>
+      <ion-text color="primary" routerLink="/main">
+        <ion-icon name="person-circle-outline"></ion-icon> Demo User Click Here
+      </ion-text>
+    </div>
 
     <ion-list *ngSwitchCase="'signup'">
       <ion-text>OR SIGN UP WITH EMAIL</ion-text>
