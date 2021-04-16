@@ -6,40 +6,29 @@
 </ion-header>
 
 <!-- Sidebar navigation -->
-<ion-content class="login-page">
-  <ion-item>User Profile</ion-item>
+<ion-content class="dashboard">
 
-  <ion-item>
-
-  </ion-item>
   <!-- Main content -->
   <ion-item>
     <!-- Show user data when logged in -->
     <div class="row" *ngIf="authService.userData as user">
-      <div class="media">
-        <img src="{{(user.photoURL) ? user.photoURL : '/assets/dummy-user.png'}}" alt="{{user.displayName}}">
-        <div class="media-body">
-          <h1>Hello, <strong>{{(user.displayName) ? user.displayName : 'User'}}</strong></h1>
-          <a class="nav-link" routerLink="/main/tabs/home">
-            <h2>Start Your Emotion Journey</h2>
-          </a>
-          <p>User ID: {{user.uid}}</p>
-          <p>Email: <strong>{{user.email}}</strong></p>
-          <p>Email Verified: <strong>{{user.emailVerified}}</strong></p>
-        </div>
-      </div>
+      <img src="{{(user.photoURL) ? user.photoURL : '/assets/dummy-user.png'}}" alt="{{user.displayName}}">
+      <h1>Hello, <strong>{{(user.displayName) ? user.displayName : 'User'}}</strong></h1>
+      <p>Email: <strong>{{user.email}}</strong></p>
+      <p>Email Verified: <strong>{{user.emailVerified}}</strong></p>
+      <p>User ID: {{user.uid}}</p>
     </div>
   </ion-item>
 
+  <ion-button color="success" routerLink="/main/tabs/home" expand="block" shape="round">
+    <ion-icon name="log-in-outline"></ion-icon> Start Your MindSpace Journey
+  </ion-button>
 
   <!-- Calling SignOut() Api from AuthService -->
   <ion-item>
-    <a class="nav-link" (click)="authService.signOut()">
-      <i class="fas fa-sign-out-alt"></i>Log out
+    <a class="logoutLink" (click)="authService.signOut()">
+      <ion-icon name="log-out-outline"></ion-icon>Log out
     </a>
   </ion-item>
-
-
-
 
 </ion-content>
