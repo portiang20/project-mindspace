@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Articles } from './../../articles.model';
+import { ArticlesService } from './../../articles.service';
 
 @Component({
   selector: 'app-strategies',
@@ -6,10 +8,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./strategies.page.scss'],
 })
 export class StrategiesPage implements OnInit {
+  loadedArticles: Articles[];
 
-  constructor() { }
+  constructor(private articlesService: ArticlesService) {}
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  ionViewWillEnter() {
+    this.loadedArticles = this.articlesService.articles;
   }
-
 }
