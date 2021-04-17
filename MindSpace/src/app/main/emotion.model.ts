@@ -3,4 +3,5 @@ export interface Emotion {
   type: string;
   name: string;
   times: number;
+  size?: string;
 }

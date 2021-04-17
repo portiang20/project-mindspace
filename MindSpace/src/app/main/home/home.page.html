@@ -14,24 +14,12 @@
     </div>
 
     <div class="bigFrame">
-      <div id="happyFrame">
-        <ion-img src="../../assets/yellow.png"></ion-img>
-      </div>
-
-      <div id="sadFrame">
-        <ion-img src="../../assets/blue.png"></ion-img>
-      </div>
-
-      <div id="angerFrame">
-        <ion-img src="../../assets/red.png"></ion-img>
-      </div>
-
-      <div id="disgustFrame">
-        <ion-img src="../../assets/green.png"></ion-img>
-      </div>
-
-      <div id="fearFrame">
-        <ion-img src="../../assets/purple.png"></ion-img>
+      <div id="circleFrame" *ngFor="let emotion of topFiveEmotions; index as i" [ngStyle]="{width: loadedEmotions[i].size, height: loadedEmotions[i].size, top: circlesPos[i].top, left: circlesPos[i].left}">
+        <ion-img *ngIf="loadedEmotions[i].type=='happy'" src="../../assets/yellow.png"></ion-img>
+        <ion-img *ngIf="loadedEmotions[i].type=='sad'" src="../../assets/blue.png"></ion-img>
+        <ion-img *ngIf="loadedEmotions[i].type=='anger'" src="../../assets/red.png"></ion-img>
+        <ion-img *ngIf="loadedEmotions[i].type=='disgust'" src="../../assets/green.png"></ion-img>
+        <ion-img *ngIf="loadedEmotions[i].type=='fear'" src="../../assets/purple.png"></ion-img>
       </div>
     </div>
 

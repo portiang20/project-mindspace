@@ -10,46 +10,10 @@
   height: 83vw;
   border-style: hidden;
 
-  #happyFrame {
+  #circleFrame {
     position: absolute;
-    height: 35%;
-    width: 35%;
-    top: 8%;
-    left: 33%;
-
-  }
-
-  #sadFrame {
-    position: absolute;
-    height: 35%;
-    width: 35%;
-    top: 28%;
-    left: 14%;
-
-  }
-  #angerFrame {
-    position: absolute;
-    height: 35%;
-    width: 35%;
-    top: 28%;
-    left: 53%;
-
-  }
-  #fearFrame {
-    position: absolute;
-    height: 35%;
-    width: 35%;
-    top: 53%;
-    left: 23%;
-
-  }
-  #disgustFrame {
-    position: relative;
-    height: 35%;
-    width: 35%;
-    top: 53%;
-    left: 48%;
-
+    max-height: 40%;
+    max-width: 40%;
   }
 }
 
