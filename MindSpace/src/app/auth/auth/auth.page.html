@@ -16,49 +16,31 @@
 </ion-header>
 
 <ion-content class="auth-page">
-  <!-- <ion-button color="success" (click)="onClickFacebook()" expand="block" shape="round">
-    <ion-icon name="logo-facebook"></ion-icon>
-    CONTINUE WITH FACEBOOK
-  </ion-button> -->
-
-  <ion-button color="success" expand="block" shape="round" (click)="authService.googleAuth()">
-    <ion-icon name="logo-google"></ion-icon>
-    CONTINUE WITH GOOGLE
-  </ion-button>
 
   <div [ngSwitch]="switch">
+    <!-- login tap content start here -->
     <ion-list *ngSwitchCase="'login'">
-      <ion-text>OR LOGIN WITH EMAIL</ion-text>
-
+      <ion-text>
+        <h3>LOGIN WITH EMAIL</h3>
+      </ion-text>
       <ion-item>
         <ion-label position="floating">Email Address</ion-label>
         <ion-input type="text" #userName required></ion-input>
       </ion-item>
-
       <ion-item>
         <ion-label position="floating">Password</ion-label>
         <ion-input type="password" #userPassword required></ion-input>
       </ion-item>
-
       <ion-button color="success" (click)="authService.signIn(userName.value, userPassword.value)" expand="block"
         shape="round">
         LOGIN
       </ion-button>
     </ion-list>
-    <div>
-      <ion-text class="link" color="success" routerLink="/auth/forgot-password">Forgot Password?
-      </ion-text>
-    </div>
-    <br />
-    <div>
-      <ion-text class="link" color="primary" routerLink="/main">
-        <ion-icon name="person-circle-outline"></ion-icon> Demo User Click Here
-      </ion-text>
-    </div>
 
     <ion-list *ngSwitchCase="'signup'">
-      <ion-text>OR SIGN UP WITH EMAIL</ion-text>
-
+      <ion-text>
+        <h3>SIGN UP WITH EMAIL</h3>
+      </ion-text>
       <!-- Inputs with labels -->
       <ion-item>
         <ion-label position="floating">Your Name</ion-label>
@@ -98,5 +80,25 @@
         expand="block" shape="round"> SIGN UP
       </ion-button>
     </ion-list>
+    <div>
+
+      <ion-button color="success" expand="block" shape="round" (click)="authService.googleAuth()">
+        <ion-icon name="logo-google"></ion-icon>
+        CONTINUE WITH GOOGLE
+      </ion-button>
+      <!-- <ion-button color="success" (click)="onClickFacebook()" expand="block" shape="round">
+        <ion-icon name="logo-facebook"></ion-icon>
+        CONTINUE WITH FACEBOOK
+      </ion-button> -->
+      <h6>
+        <ion-text class="link" color="success" routerLink="/auth/forgot-password">Forgot Password?
+        </ion-text>
+      </h6>
+      <h6>
+        <ion-text class="link" color="primary" routerLink="/main">
+          <ion-icon name="person-circle-outline"></ion-icon> Demo User Click Here
+        </ion-text>
+      </h6>
+    </div>
   </div>
 </ion-content>

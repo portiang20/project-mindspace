@@ -12,7 +12,8 @@
   <ion-item>
     <!-- Show user data when logged in -->
     <div class="row" *ngIf="authService.userData as user">
-      <img src="{{(user.photoURL) ? user.photoURL : '/assets/dummy-user.png'}}" alt="{{user.displayName}}">
+      <img class="avatar" src="{{(user.photoURL) ? user.photoURL : '/assets/dummy-user.png'}}"
+        alt="{{user.displayName}}">
       <h1>Hello, <strong>{{(user.displayName) ? user.displayName : 'User'}}</strong></h1>
       <p>Email: <strong>{{user.email}}</strong></p>
       <p>Email Verified: <strong>{{user.emailVerified}}</strong></p>
@@ -25,10 +26,8 @@
   </ion-button>
 
   <!-- Calling SignOut() Api from AuthService -->
-  <ion-item>
-    <a class="logoutLink" (click)="authService.signOut()">
-      <ion-icon name="log-out-outline"></ion-icon>Log out
-    </a>
-  </ion-item>
+  <a class="link" (click)="authService.signOut()">
+    <ion-icon name="log-out-outline"></ion-icon>Log out
+  </a>
 
 </ion-content>

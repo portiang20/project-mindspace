@@ -9,12 +9,7 @@ import { TimelinePageRoutingModule } from './timeline-routing.module';
 import { TimelinePage } from './timeline.page';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    TimelinePageRoutingModule
-  ],
-  declarations: [TimelinePage]
+  imports: [CommonModule, FormsModule, IonicModule, TimelinePageRoutingModule],
+  declarations: [TimelinePage],
 })
 export class TimelinePageModule {}
