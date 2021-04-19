@@ -34,9 +34,6 @@ import { SignupModule } from './auth/auth/signup/signup.module';
     DashboardComponent,
     ForgotPasswordComponent,
     VerifyEmailComponent,
-
-    // LoginComponent,
-    // SignupComponent,
   ],
   entryComponents: [],
   imports: [

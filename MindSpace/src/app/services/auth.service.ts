@@ -40,21 +40,17 @@ export class AuthService {
   }
 
   // Auth logic to run auth providers : Google
-  authLogin(provider): Promise<void> {
-    return this.afAuth.auth
-      .signInWithPopup(provider)
-      .then((result) => {
-        this.ngZone.run(() => {
-          this.router.navigate(['dashboard']);
-          // this.router.navigate(['main']);
-        });
+  async authLogin(provider) {
+    try {
+      let result = await this.afAuth.auth.signInWithPopup(provider);
+      this.setUserData(result.user);
+      let idToken = this.getToken(result);
+      //TBD: send the idToken to Django server to retreive the JWT token
 
-        this.getToken(result);
-        this.setUserData(result.user);
-      })
-      .catch((error) => {
-        window.alert(error);
-      });
+      this.router.navigate(['/auth/dashboard']);
+    } catch (error) {
+      window.alert(error);
+    }
   }
 
   // return google auth idToken for the use of Django
@@ -64,59 +60,63 @@ export class AuthService {
   }
 
   // Sign in with email/password
-  signIn(email, password) {
-    return this.afAuth.auth
-      .signInWithEmailAndPassword(email, password)
-      .then((result) => {
-        this.ngZone.run(() => {
-          this.router.navigate(['dashboard']);
-        });
-        this.setUserData(result.user, result.user.displayName);
-      })
-      .catch((error) => {
-        window.alert(error.message);
-      });
+  async signIn(email, password) {
+    try {
+      let result = await this.afAuth.auth.signInWithEmailAndPassword(
+        email,
+        password
+      );
+      console.log(result);
+      this.setUserData(result.user, result.user.displayName);
+      let idToken = await this.afAuth.auth.currentUser.getIdToken(true);
+      //TBD: send the idToken to Django server to retreive the JWT token
+
+      this.router.navigate(['/auth/dashboard']);
+    } catch (error) {
+      window.alert(error);
+    }
   }
 
   // Sign up with email/password TODO: save user name
-  signUp(username, email, password) {
-    return this.afAuth.auth
-      .createUserWithEmailAndPassword(email, password)
-      .then((result) => {
-        /* Call the sendVerificaitonMail() function when new user sign
+  async signUp(username, email, password) {
+    try {
+      let result = await this.afAuth.auth.createUserWithEmailAndPassword(
+        email,
+        password
+      );
+      /* Call the sendVerificaitonMail() function when new user sign
         up and returns promise */
-        this.sendVerificationMail();
+      this.sendVerificationMail();
 
-        this.setUserData(result.user, username);
-      })
-      .catch((error) => {
-        window.alert(error.message);
-      });
+      this.setUserData(result.user, username);
+    } catch (error) {
+      window.alert(error.message);
+    }
   }
 
   // Send email verfificaiton when new user sign up
-  sendVerificationMail() {
-    return this.afAuth.auth.currentUser.sendEmailVerification().then(() => {
-      this.router.navigate(['auth', 'verify-email-address']);
-    });
+  async sendVerificationMail() {
+    await this.afAuth.auth.currentUser.sendEmailVerification();
+    this.router.navigate(['auth', 'verify-email-address']);
   }
 
   // Reset Forggot password
-  forgotPassword(passwordResetEmail) {
-    return this.afAuth.auth
-      .sendPasswordResetEmail(passwordResetEmail)
-      .then(() => {
-        window.alert('Password reset email sent, check your inbox.');
-      })
-      .catch((error) => {
-        window.alert(error);
-      });
+  async forgotPassword(passwordResetEmail) {
+    try {
+      await this.afAuth.auth.sendPasswordResetEmail(passwordResetEmail);
+      window.alert('Password reset email sent, check your inbox.');
+    } catch (error) {
+      window.alert(error);
+    }
   }
 
   // Returns true when user is looged in and email is verified
   get isLoggedIn(): boolean {
     const user = JSON.parse(localStorage.getItem('user'));
-    return user !== null && user.emailVerified !== false ? true : false;
+    // Those ends with test.com are created by admin
+    return (
+      user !== null && (user.emailVerified || user.email.endsWith('test.com'))
+    );
   }
 
   /* Setting up user data when sign in with username/password,
@@ -140,10 +140,9 @@ export class AuthService {
   }
 
   // Sign out
-  signOut() {
-    return this.afAuth.auth.signOut().then(() => {
-      localStorage.removeItem('user');
-      this.router.navigate(['landing']);
-    });
+  async signOut() {
+    await this.afAuth.auth.signOut();
+    localStorage.removeItem('user');
+    this.router.navigate(['landing']);
   }
 }
