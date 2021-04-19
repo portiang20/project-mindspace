@@ -11,11 +11,7 @@ export class LandingPage implements OnInit {
 
   ngOnInit() {}
 
-  onClickSignUp() {
-    this.route.navigateByUrl('auth');
-  }
-
-  onClickLogin() {
+  onClickStart() {
     this.route.navigateByUrl('auth');
   }
 }
