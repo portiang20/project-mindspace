@@ -94,13 +94,13 @@ export class AuthService {
     }
   }
 
-  // Send email verfificaiton when new user sign up
+  // Send email verification when new user sign up
   async sendVerificationMail() {
     await this.afAuth.auth.currentUser.sendEmailVerification();
     this.router.navigate(['auth', 'verify-email-address']);
   }
 
-  // Reset Forggot password
+  // Reset Forgot password
   async forgotPassword(passwordResetEmail) {
     try {
       await this.afAuth.auth.sendPasswordResetEmail(passwordResetEmail);

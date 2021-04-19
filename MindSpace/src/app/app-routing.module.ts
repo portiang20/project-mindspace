@@ -2,9 +2,6 @@ import { NotfoundComponent } from './notfound/notfound.component';
 import { NgModule, Component } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './auth/dashboard/dashboard.component';
-// import { ForgotPasswordComponent } from '../app/auth/forgot-password/forgot-password.component';
-// import { VerifyEmailComponent } from '../app/auth/verify-email/verify-email.component';
-
 import { AuthGuard } from '../app/auth/auth.guard';
 
 const routes: Routes = [
