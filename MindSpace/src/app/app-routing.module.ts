@@ -23,13 +23,15 @@ const routes: Routes = [
     loadChildren: () =>
       import('./auth/auth/auth.module').then((m) => m.AuthPageModule),
   },
+  /*
   {
     path: 'dashboard',
     component: DashboardComponent,
     canActivate: [AuthGuard],
   },
-  // { path: 'forgot-password', component: ForgotPasswordComponent },
-  // { path: 'verify-email-address', component: VerifyEmailComponent },
+  { path: 'forgot-password', component: ForgotPasswordComponent },
+  { path: 'verify-email-address', component: VerifyEmailComponent },
+  */
   {
     path: 'main',
     loadChildren: () =>

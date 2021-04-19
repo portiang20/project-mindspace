@@ -25,17 +25,18 @@
 <ion-item>
   <ion-checkbox checked color="success"> </ion-checkbox>
   <p>
-    <ion-text>
-      I have read the
-    </ion-text>
-    <ion-text color="success">
-      privacy policy
-    </ion-text>
+    <ion-text> I have read the </ion-text>
+    <ion-text color="success"> privacy policy </ion-text>
   </p>
 </ion-item>
 
 <!-- TODO:Eric sign up function using django database -->
 <!-- routerLink="/main/tabs/home"  -->
-<ion-button color="success" (click)="authService.signUp(userName.value, signUpName.value, userPwd.value)" expand="block"
-  shape="round"> SIGN UP
+<ion-button
+  color="success"
+  (click)="authService.signUp(userName.value, signUpName.value, userPwd.value)"
+  expand="block"
+  shape="round"
+>
+  SIGN UP
 </ion-button>

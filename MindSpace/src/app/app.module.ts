@@ -1,5 +1,3 @@
-import { SignupComponent } from './auth/auth/signup/signup.component';
-import { LoginComponent } from './auth/auth/login/login.component';
 import { AlertComponent } from './alert/alert.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -36,8 +34,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     DashboardComponent,
     ForgotPasswordComponent,
     VerifyEmailComponent,
-    LoginComponent,
-    SignupComponent,
   ],
   entryComponents: [],
   imports: [
