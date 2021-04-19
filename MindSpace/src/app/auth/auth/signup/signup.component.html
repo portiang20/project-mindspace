@@ -14,13 +14,8 @@
 
 <ion-item>
   <ion-label position="floating">Password</ion-label>
-  <ion-input type="password" #userPwd></ion-input>
+  <ion-input type="password" #userPwd required></ion-input>
 </ion-item>
-
-<!-- <ion-item>
-        <ion-label position="floating"> Repeat Password</ion-label>
-        <ion-input type="password" #repeatPwd></ion-input>
-      </ion-item> -->
 
 <ion-item>
   <ion-checkbox checked color="success"> </ion-checkbox>
@@ -34,8 +29,5 @@
   </p>
 </ion-item>
 
-<!-- TODO:Eric sign up function using django database -->
-<!-- routerLink="/main/tabs/home"  -->
-<ion-button color="success" (click)="authService.signUp(userName.value, signUpName.value, userPwd.value)" expand="block"
-  shape="round"> SIGN UP
+<ion-button color="success" (click)="onClickSignup(userName, signUpName, userPwd)" expand="block" shape="round"> SIGN UP
 </ion-button>

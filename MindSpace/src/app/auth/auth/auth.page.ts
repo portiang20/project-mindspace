@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-auth',
@@ -11,8 +11,8 @@ import { AuthService } from '../../services/auth.service';
 export class AuthPage implements OnInit {
   switch: string = 'login';
   constructor(
-    public alertController: AlertController,
     private route: Router,
+    public alertController: AlertController,
     public authService: AuthService
   ) {}
 

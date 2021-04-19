@@ -9,7 +9,6 @@
   <ion-label position="floating">Password</ion-label>
   <ion-input type="password" #userPassword required></ion-input>
 </ion-item>
-<ion-button color="success" (click)="authService.signIn(userName.value, userPassword.value)" expand="block"
-  shape="round">
+<ion-button color="success" (click)="onClickLogin(userName, userPassword)" expand="block" shape="round">
   LOGIN
 </ion-button>
