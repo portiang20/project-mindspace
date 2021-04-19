@@ -5,13 +5,13 @@
 </ion-header>
 
 <ion-content>
-
   <div class="row" *ngIf="authService.userData as user">
-    <img class="avatar" src="{{(user.photoURL) ? user.photoURL : '/assets/dummy-user.png'}}" alt="{{user.displayName}}">
+    <img class="avatar" src="{{(user.photoURL) ? user.photoURL : '/assets/demouser.png'}}" alt="{{user.displayName}}">
+    <!-- TODO: update User name from database if it is not google auth-->
     <h2><strong>{{(user.displayName) ? user.displayName : 'User'}}</strong></h2>
   </div>
   <ion-item>
-    <ion-label class="link" color="primary" routerLink="/dashboard">Go to Dashboard</ion-label>
+    <ion-label class="link" color="primary" routerLink="/auth/dashboard">Go to Dashboard</ion-label>
   </ion-item>
   <ion-item>
     <ion-label>

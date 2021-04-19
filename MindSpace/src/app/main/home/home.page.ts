@@ -9,8 +9,7 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
-  // TODO: need update from user name
-  name: string = 'User';
+  name: string = '';
   loadedEmotions: Emotion[] = [];
   topFiveEmotions: Emotion[] = [];
 
@@ -27,7 +26,7 @@ export class HomePage implements OnInit {
     public authService: AuthService
   ) {
     if (authService) {
-      this.name = authService.userData.displayName;
+      this.name = authService.userData.displayName || 'User';
     }
   }
 

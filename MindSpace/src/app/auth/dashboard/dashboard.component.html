@@ -12,8 +12,7 @@
   <ion-item>
     <!-- Show user data when logged in -->
     <div class="row" *ngIf="authService.userData as user">
-      <img class="avatar" src="{{(user.photoURL) ? user.photoURL : '/assets/dummy-user.png'}}"
-        alt="{{user.displayName}}">
+      <img class="avatar" src="{{(user.photoURL) ? user.photoURL : '/assets/demouser.png'}}" alt="{{user.displayName}}">
       <h1>Hello, <strong>{{(user.displayName) ? user.displayName : 'User'}}</strong></h1>
       <p>Email: <strong>{{user.email}}</strong></p>
       <p>Email Verified: <strong>{{user.emailVerified}}</strong></p>

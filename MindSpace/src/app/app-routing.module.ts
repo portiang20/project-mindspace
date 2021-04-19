@@ -1,8 +1,6 @@
 import { NotfoundComponent } from './notfound/notfound.component';
 import { NgModule, Component } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { DashboardComponent } from './auth/dashboard/dashboard.component';
-import { AuthGuard } from '../app/auth/auth.guard';
 
 const routes: Routes = [
   {

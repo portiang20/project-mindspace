@@ -21,6 +21,9 @@ export class AuthPage implements OnInit {
   // onClickFacebook() {
   //   console.log('click on FaceBook auth');
   // }
+  demoUserLogin() {
+    this.authService.signIn('annie@test.com', '123456');
+  }
 
   async presentAlert() {
     const alert = await this.alertController.create({
