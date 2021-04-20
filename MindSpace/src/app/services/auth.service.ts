@@ -1,4 +1,4 @@
-import { Injectable, NgZone } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { User } from '../services/user';
 import { auth } from 'firebase/app';
 import { AngularFireAuth } from '@angular/fire/auth';
@@ -7,18 +7,23 @@ import {
   AngularFirestoreDocument,
 } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { take, map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   userData: any; // Save logged in user data
+  _djangoUrl = 'http://127.0.0.1:8000/';
+  _djangoToken: string;
 
   constructor(
-    public afs: AngularFirestore, // Inject Firestore service
-    public afAuth: AngularFireAuth, // Inject Firebase auth service
-    public router: Router,
-    public ngZone: NgZone // NgZone service to remove outside scope warning
+    private afs: AngularFirestore, // Inject Firestore service
+    private afAuth: AngularFireAuth, // Inject Firebase auth service
+    private router: Router,
+    private http: HttpClient
   ) {
     /* Saving user data in localstorage when
     logged in and setting up null when logged out */
@@ -32,6 +37,8 @@ export class AuthService {
         JSON.parse(localStorage.getItem('user'));
       }
     });
+    // Set djangoToken that is saved before
+    this._djangoToken = localStorage.getItem('djangoToken');
   }
 
   // Sign in with Google
@@ -39,24 +46,39 @@ export class AuthService {
     return this.authLogin(new auth.GoogleAuthProvider());
   }
 
+  // From Eric: It is confirmed that it will not pass the token test in Django Server
+  // return google auth idToken for the use of Django
+  /*
+  getToken(result) {
+    console.log('Credential:', result.credential.idToken);
+    return result.credential.idToken;
+  }
+  */
+
+  // Pass the returned token from FireAuth to django server for getting djangoToken
+  getDjangoToken(uid: string, fireAuthToken: string): Observable<string> {
+    return this.http
+      .post(this.djangoUrl + 'api/user/token/', {
+        uid: uid,
+        token: fireAuthToken,
+      })
+      .pipe(take(1)) as Observable<string>;
+  }
+
   // Auth logic to run auth providers : Google
   async authLogin(provider) {
     try {
       let result = await this.afAuth.auth.signInWithPopup(provider);
       this.setUserData(result.user);
-      let idToken = this.getToken(result);
-      //TBD: send the idToken to Django server to retreive the JWT token
-
-      this.router.navigate(['/auth/dashboard']);
+      let idToken = await this.afAuth.auth.currentUser.getIdToken(true);
+      this.getDjangoToken(result.user.uid, idToken).subscribe((djangoToken) => {
+        this._djangoToken = djangoToken;
+        localStorage.setItem('djangoToken', djangoToken);
+        this.router.navigate(['/auth/dashboard']);
+      });
     } catch (error) {
       window.alert(error);
     }
-  }
-
-  // return google auth idToken for the use of Django
-  getToken(result) {
-    console.log('Credential:', result.credential.idToken);
-    return result.credential.idToken;
   }
 
   // Sign in with email/password
@@ -66,12 +88,14 @@ export class AuthService {
         email,
         password
       );
-      console.log(result);
       this.setUserData(result.user, result.user.displayName);
+      // TBD: if the email is not verified, do not proceed
       let idToken = await this.afAuth.auth.currentUser.getIdToken(true);
-      //TBD: send the idToken to Django server to retreive the JWT token
-
-      this.router.navigate(['/auth/dashboard']);
+      this.getDjangoToken(result.user.uid, idToken).subscribe((djangoToken) => {
+        this._djangoToken = djangoToken;
+        localStorage.setItem('djangoToken', djangoToken);
+        this.router.navigate(['/auth/dashboard']);
+      });
     } catch (error) {
       window.alert(error);
     }
@@ -115,8 +139,18 @@ export class AuthService {
     const user = JSON.parse(localStorage.getItem('user'));
     // Those ends with test.com are created by admin
     return (
-      user !== null && (user.emailVerified || user.email.endsWith('test.com'))
+      user !== null &&
+      (user.emailVerified || user.email.endsWith('test.com')) &&
+      this._djangoToken != null
     );
+  }
+
+  get djangoUrl(): string {
+    return this._djangoUrl;
+  }
+
+  get djangoToken(): string {
+    return this._djangoToken;
   }
 
   /* Setting up user data when sign in with username/password,
@@ -143,6 +177,8 @@ export class AuthService {
   async signOut() {
     await this.afAuth.auth.signOut();
     localStorage.removeItem('user');
+    localStorage.removeItem('djangoToken');
+    this._djangoToken = null;
     this.router.navigate(['landing']);
   }
 }

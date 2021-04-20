@@ -2,6 +2,7 @@ import { AlertComponent } from './alert/alert.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouteReuseStrategy } from '@angular/router';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
@@ -25,6 +26,7 @@ import { AuthService } from './services/auth.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginModule } from './auth/auth/login/login.module';
 import { SignupModule } from './auth/auth/signup/signup.module';
+import { DjangoTokenInterceptor } from './_helper/django-tk.interceptor';
 
 @NgModule({
   declarations: [
@@ -44,6 +46,7 @@ import { SignupModule } from './auth/auth/signup/signup.module';
     AngularFireAuthModule,
     AngularFirestoreModule,
     ReactiveFormsModule,
+    HttpClientModule,
     LoginModule,
     SignupModule,
   ],
@@ -52,6 +55,11 @@ import { SignupModule } from './auth/auth/signup/signup.module';
     {
       provide: RouteReuseStrategy,
       useClass: IonicRouteStrategy,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: DjangoTokenInterceptor,
+      multi: true,
     },
   ],
   bootstrap: [AppComponent],
