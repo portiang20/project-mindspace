@@ -26,7 +26,7 @@ export class HomePage implements OnInit {
     public authService: AuthService
   ) {
     if (authService) {
-      this.name = authService.userData.displayName || 'User';
+      this.name = authService.userData.displayName || 'Dear';
     }
   }
 

@@ -2,14 +2,14 @@
   <h3>SIGN UP WITH EMAIL</h3>
 </ion-text>
 <!-- Inputs with labels -->
-<ion-item>
+<!-- <ion-item>
   <ion-label position="floating">Your Name</ion-label>
   <ion-input type="text" #userName required></ion-input>
-</ion-item>
+</ion-item> -->
 
 <ion-item>
   <ion-label position="floating">Email Address</ion-label>
-  <ion-input type="text" #signUpName required></ion-input>
+  <ion-input type="text" #signUpEmail required></ion-input>
 </ion-item>
 
 <ion-item>
@@ -25,5 +25,5 @@
   </p>
 </ion-item>
 
-<ion-button color="success" (click)="onClickSignup(userName, signUpName, userPwd)" expand="block" shape="round"> SIGN UP
+<ion-button color="success" (click)="onClickSignup(signUpEmail, userPwd)" expand="block" shape="round"> SIGN UP
 </ion-button>

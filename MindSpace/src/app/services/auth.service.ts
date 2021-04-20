@@ -95,14 +95,15 @@ export class AuthService {
         this._djangoToken = djangoToken;
         localStorage.setItem('djangoToken', djangoToken);
         this.router.navigate(['/auth/dashboard']);
+        // this.router.navigate(['/main']);
       });
     } catch (error) {
       window.alert(error);
     }
   }
 
-  // Sign up with email/password TODO: save user name
-  async signUp(username, email, password) {
+  // Sign up with email/password
+  async signUp(email, password) {
     try {
       let result = await this.afAuth.auth.createUserWithEmailAndPassword(
         email,
@@ -112,7 +113,7 @@ export class AuthService {
         up and returns promise */
       this.sendVerificationMail();
 
-      this.setUserData(result.user, username);
+      this.setUserData(result.user);
     } catch (error) {
       window.alert(error.message);
     }
