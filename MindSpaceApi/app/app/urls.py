@@ -19,4 +19,5 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/user/', include('core.urls')), #for mapping the urls in 'core' app
+    path('api/record/', include('record.urls')), #for mapping the urls in 'record' app
 ]
