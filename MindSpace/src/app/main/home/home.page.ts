@@ -25,7 +25,7 @@ export class HomePage implements OnInit {
     private emotionsService: EmotionsService,
     public authService: AuthService
   ) {
-    if (authService) {
+    if (authService.isLoggedIn) {
       this.name = authService.userData.displayName || 'Dear';
     }
   }

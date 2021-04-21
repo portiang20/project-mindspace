@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from '../auth/auth.guard';
 
 import { MainPage } from './main.page';
 
@@ -27,6 +28,7 @@ const routes: Routes = [
         path: 'home',
         loadChildren: () =>
           import('./home/home.module').then((m) => m.HomePageModule),
+        canActivate: [AuthGuard],
       },
       {
         path: 'insights',

@@ -32,13 +32,14 @@ export class AuthService {
         this.userData = user;
         localStorage.setItem('user', JSON.stringify(this.userData));
         JSON.parse(localStorage.getItem('user'));
+
+        // Set djangoToken that is saved before
+        this._djangoToken = localStorage.getItem('djangoToken');
       } else {
         localStorage.setItem('user', null);
         JSON.parse(localStorage.getItem('user'));
       }
     });
-    // Set djangoToken that is saved before
-    this._djangoToken = localStorage.getItem('djangoToken');
   }
 
   // Sign in with Google
@@ -56,13 +57,16 @@ export class AuthService {
   */
 
   // Pass the returned token from FireAuth to django server for getting djangoToken
-  getDjangoToken(uid: string, fireAuthToken: string): Observable<string> {
+  getDjangoToken(
+    uid: string,
+    fireAuthToken: string
+  ): Observable<{ token: string }> {
     return this.http
       .post(this.djangoUrl + 'api/user/token/', {
         uid: uid,
         token: fireAuthToken,
       })
-      .pipe(take(1)) as Observable<string>;
+      .pipe(take(1)) as Observable<{ token: string }>;
   }
 
   // Auth logic to run auth providers : Google
@@ -72,8 +76,8 @@ export class AuthService {
       this.setUserData(result.user);
       let idToken = await this.afAuth.auth.currentUser.getIdToken(true);
       this.getDjangoToken(result.user.uid, idToken).subscribe((djangoToken) => {
-        this._djangoToken = djangoToken;
-        localStorage.setItem('djangoToken', djangoToken);
+        this._djangoToken = djangoToken.token;
+        localStorage.setItem('djangoToken', djangoToken.token);
         this.router.navigate(['/auth/dashboard']);
       });
     } catch (error) {
@@ -92,8 +96,8 @@ export class AuthService {
       // TBD: if the email is not verified, do not proceed
       let idToken = await this.afAuth.auth.currentUser.getIdToken(true);
       this.getDjangoToken(result.user.uid, idToken).subscribe((djangoToken) => {
-        this._djangoToken = djangoToken;
-        localStorage.setItem('djangoToken', djangoToken);
+        this._djangoToken = djangoToken.token;
+        localStorage.setItem('djangoToken', djangoToken.token);
         this.router.navigate(['/auth/dashboard']);
         // this.router.navigate(['/main']);
       });
