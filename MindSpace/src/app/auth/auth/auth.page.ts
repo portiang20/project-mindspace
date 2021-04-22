@@ -22,7 +22,7 @@ export class AuthPage implements OnInit {
   //   console.log('click on FaceBook auth');
   // }
   demoUserLogin() {
-    this.authService.signIn('annie@test.com', '123456');
+    this.authService.signIn('test@test.com', '123456');
   }
 
   async presentAlert() {
