@@ -12,8 +12,8 @@
 
   #circleFrame {
     position: absolute;
-    max-height: 40%;
-    max-width: 40%;
+    max-height: 42%;
+    max-width: 42%;
   }
 }
 
@@ -27,9 +27,14 @@
     height: 10px;
     width: 10px;
     border-radius: 50%;
+    background-color: yellow;
+  }
+  #excitedDot {
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
     background-color: orange;
   }
-
   #sadDot {
     height: 10px;
     width: 10px;
@@ -53,5 +58,11 @@
     width: 10px;
     border-radius: 50%;
     background-color: lightseagreen;
+  }
+  #neutralDot {
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    background-color: grey;
   }
 }

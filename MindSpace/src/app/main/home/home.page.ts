@@ -16,11 +16,11 @@ export class HomePage implements OnInit, OnDestroy {
   topFiveEmotions: Emotion[] = [];
 
   circlesPos = [
-    { top: '8%', left: '35%' },
-    { top: '28%', left: '16%' },
-    { top: '28%', left: '53%' },
-    { top: '53%', left: '50%' },
-    { top: '38%', left: '32%' },
+    { top: '10%', left: '37%' },
+    { top: '30%', left: '18%' },
+    { top: '30%', left: '56%' },
+    { top: '56%', left: '50%' },
+    { top: '56%', left: '27%' },
   ];
 
   constructor(
@@ -39,7 +39,7 @@ export class HomePage implements OnInit, OnDestroy {
       emotions = emotions.sort((a, b) => b.times - a.times);
       this.loadedEmotions = emotions.map((emotion) => {
         ///
-        let transformed_size = 25 + emotion.times + '%';
+        let transformed_size = 25 + emotion.times/1.5 + '%';
         ///
         return { ...emotion, size: transformed_size };
       });

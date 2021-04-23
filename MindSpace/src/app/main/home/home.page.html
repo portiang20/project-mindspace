@@ -16,10 +16,12 @@
     <div id="circleFrame" *ngFor="let emotion of topFiveEmotions; index as i"
       [ngStyle]="{width: loadedEmotions[i].size, height: loadedEmotions[i].size, top: circlesPos[i].top, left: circlesPos[i].left}">
       <ion-img *ngIf="loadedEmotions[i].type=='happy'" src="../../assets/yellow.png"></ion-img>
+      <ion-img *ngIf="loadedEmotions[i].type=='excited'" src="../../assets/orange.png"></ion-img>
       <ion-img *ngIf="loadedEmotions[i].type=='sad'" src="../../assets/blue.png"></ion-img>
       <ion-img *ngIf="loadedEmotions[i].type=='anger'" src="../../assets/red.png"></ion-img>
       <ion-img *ngIf="loadedEmotions[i].type=='disgust'" src="../../assets/green.png"></ion-img>
       <ion-img *ngIf="loadedEmotions[i].type=='fear'" src="../../assets/purple.png"></ion-img>
+      <ion-img *ngIf="loadedEmotions[i].type=='neutral'" src="../../assets/grey.png"></ion-img>
     </div>
   </div>
   <!-- emotion map end -->
@@ -30,13 +32,15 @@
     </h4>
     <!-- emotion list start-->
     <ion-list>
-      <ion-item class="link" *ngFor="let e of loadedEmotions">
+      <ion-item class="link" *ngFor="let e of topFiveEmotions">
         <div class="dot" slot="start">
           <div *ngIf="e.type=='happy'" id="happyDot"></div>
+          <div *ngIf="e.type=='excited'" id="excitedDot"></div>
           <div *ngIf="e.type=='sad'" id="sadDot"></div>
           <div *ngIf="e.type=='anger'" id="angerDot"></div>
           <div *ngIf="e.type=='fear'" id="fearDot"></div>
           <div *ngIf="e.type=='disgust'" id="disgustDot"></div>
+          <div *ngIf="e.type=='neutral'" id="neutralDot"></div>
         </div>
         <!-- url link -> explore/emotion.name-->
         <ion-text [routerLink]="['../explore', e.name]">{{e.name}}</ion-text>

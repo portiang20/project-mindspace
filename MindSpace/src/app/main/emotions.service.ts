@@ -14,10 +14,10 @@ export class EmotionsService {
   // Use BehaviorSubject for making _emotions observable
   private _emotions = new BehaviorSubject<Emotion[]>([
     { id: 'e1', type: 'happy', name: 'Excitement', times: 23 },
-    //{ id: 'e2', type: 'happy', name: 'Peace', times: 18 },
+    { id: 'e2', type: 'happy', name: 'Peace', times: 18 },
     { id: 'e3', type: 'sad', name: 'Disappointment', times: 14 },
     { id: 'e4', type: 'anger', name: 'Fury', times: 12 },
-    //{ id: 'e5', type: 'fear', name: 'Anxiety', times: 11 },
+    { id: 'e5', type: 'fear', name: 'Anxiety', times: 11 },
     { id: 'e6', type: 'fear', name: 'Panic', times: 9 },
     { id: 'e7', type: 'disgust', name: 'Dislike', times: 6 },
   ]);
@@ -57,20 +57,26 @@ export class EmotionsService {
         console.log(results);
         let updatedEmotions: Emotion[] = results.map((result) => {
           let type = '';
-          if (result.name == 'joy') {
+          if (result.name == 'joy' || result.name == 'happy' || result.name == 'gratitude' || result.name == 'admiration' || result.name == 'optimism' || result.name == 'relief' || result.name == 'love') {
             type = 'happy';
           }
-          if (result.name == 'sadness') {
+          if (result.name == 'sadness' || result.name == 'grief' || result.name == 'remorse' || result.name == 'disappointment') {
             type = 'sad';
           }
-          if (result.name == 'anger') {
+          if (result.name == 'anger' || result.name == 'annoyance') {
             type = 'anger';
           }
-          if (result.name == 'fear') {
+          if (result.name == 'fear' || result.name == 'nervousness') {
             type = 'fear';
           }
-          if (result.name == 'disgust') {
+          if (result.name == 'disgust' || result.name == 'embarrass' || result.name == 'confusion') {
             type = 'disgust';
+          }
+          if (result.name == 'surprise' || result.name == 'excitement' || result.name == 'amusement' || result.name == 'pride') {
+            type = 'excited';
+          }
+          if (result.name == 'neutral' || result.name == 'desire' || result.name == 'curiosity' || result.name == 'realization' || result.name == 'caring' || result.name == 'disapproval' || result.name == 'approval') {
+            type = 'neutral';
           }
           //TODO: add the remaining 23 emotions
           return { ...result, type };
