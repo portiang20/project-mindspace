@@ -31,6 +31,8 @@ services:
       - DB_NAME=app
       - DB_USER=mysql
       - DB_PASS=secret
+      - U1_UID=m78via5KcyPUSe1XJb0Tu3XwcZD3
+      - U2_UID=h28UH8bcXOVR811IR786r5AlfrJ2
       - GOOGLE_APPLICATION_CREDENTIALS=/app/mindspace-adelaide-firebase-adminsdk-yqysv-eb4cc6f124.json
     depends_on:
       - db
