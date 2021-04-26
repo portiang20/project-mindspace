@@ -10,6 +10,18 @@
   height: 83vw;
   border-style: hidden;
 
+  #emotionName{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: rgb(70, 70, 70);
+    font-size: 12px;
+    font-weight: bold;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-shadow: 1px 1px #b4b3b383;
+  }
+
   #circleFrame {
     position: absolute;
     max-height: 42%;

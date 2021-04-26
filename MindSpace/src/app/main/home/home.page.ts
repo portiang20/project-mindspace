@@ -23,6 +23,14 @@ export class HomePage implements OnInit, OnDestroy {
     { top: '56%', left: '27%' },
   ];
 
+  textPos = [
+    { top: '-5%', left: '50%' },
+    { top: '50%', left: '-15%' },
+    { top: '50%', left: '80%' },
+    { top: '110%', left: '80%' },
+    { top: '110%', left: '-15%' },
+  ];
+
   constructor(
     private emotionsService: EmotionsService,
     public authService: AuthService
