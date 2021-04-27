@@ -26,12 +26,12 @@ P.S. It is always good to first run "git pull" first before working on your chan
 
 ## Access the database with Django admin page
 
-    You can access the server with the following admin account with the database pushed into the current github project:
+1.  You can access the server with the following admin account with the database pushed into the current github project:
 
     Uid: a1
     Password: 123456
 
-    If you want to start the Django server with an empty database, after the backend server is running, you can run the following command to create a new superadmin user:
+2.  If you want to start the Django server with an empty database, after the backend server is running, you can run the following command to create a new superadmin user:
 
     docker-compose run --rm app sh -c "python manage.py createsuperuser"
 
@@ -52,6 +52,6 @@ P.S. It is always good to first run "git pull" first before working on your chan
 
 ## How to run the ionic project
 
-    Navigate to the folder /MindSpace, run:
+1.  Navigate to the folder /MindSpace, run:
 
     ionic serve
