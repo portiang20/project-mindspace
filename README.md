@@ -6,7 +6,7 @@
 
 1.  Commit the current work
 
-    git add .
+    git add .\
     git commit -m “(message)”
 
 2.  Push to github
@@ -19,7 +19,7 @@ P.S. It is always good to first run "git pull" first before working on your chan
 
 1.  With docker installed and update, navigate to the folder /MindSpaceApi and run:
 
-    docker-compose build
+    docker-compose build\
     docker-compose up
 
 2.  After that, you can go to http://127.0.0.1/admin to access the admin page of the Django server
@@ -28,7 +28,7 @@ P.S. It is always good to first run "git pull" first before working on your chan
 
 1.  You can access the server with the following admin account with the database pushed into the current github project:
 
-    Uid: a1
+    Uid: a1\
     Password: 123456
 
 2.  If you want to start the Django server with an empty database, after the backend server is running, you can run the following command to create a new superadmin user:
@@ -45,7 +45,7 @@ P.S. It is always good to first run "git pull" first before working on your chan
 
     Solution: Delete all the images and building cache of Docker in your local machine with the following command.
 
-    docker image prune -a
+    docker image prune -a\
     docker builder prune -a
 
     After that, try to build and run the docker container with "docker-compose build" and "docker-compose up" again
