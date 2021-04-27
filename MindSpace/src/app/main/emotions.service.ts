@@ -57,10 +57,23 @@ export class EmotionsService {
         console.log(results);
         let updatedEmotions: Emotion[] = results.map((result) => {
           let type = '';
-          if (result.name == 'joy' || result.name == 'happy' || result.name == 'gratitude' || result.name == 'admiration' || result.name == 'optimism' || result.name == 'relief' || result.name == 'love') {
+          if (
+            result.name == 'joy' ||
+            result.name == 'happy' ||
+            result.name == 'gratitude' ||
+            result.name == 'admiration' ||
+            result.name == 'optimism' ||
+            result.name == 'relief' ||
+            result.name == 'love'
+          ) {
             type = 'happy';
           }
-          if (result.name == 'sadness' || result.name == 'grief' || result.name == 'remorse' || result.name == 'disappointment') {
+          if (
+            result.name == 'sadness' ||
+            result.name == 'grief' ||
+            result.name == 'remorse' ||
+            result.name == 'disappointment'
+          ) {
             type = 'sad';
           }
           if (result.name == 'anger' || result.name == 'annoyance') {
@@ -69,21 +82,36 @@ export class EmotionsService {
           if (result.name == 'fear' || result.name == 'nervousness') {
             type = 'fear';
           }
-          if (result.name == 'disgust' || result.name == 'embarrass' || result.name == 'confusion') {
+          if (
+            result.name == 'disgust' ||
+            result.name == 'embarrass' ||
+            result.name == 'confusion'
+          ) {
             type = 'disgust';
           }
-          if (result.name == 'surprise' || result.name == 'excitement' || result.name == 'amusement' || result.name == 'pride') {
+          if (
+            result.name == 'surprise' ||
+            result.name == 'excitement' ||
+            result.name == 'amusement' ||
+            result.name == 'pride'
+          ) {
             type = 'excited';
           }
-          if (result.name == 'neutral' || result.name == 'desire' || result.name == 'curiosity' || result.name == 'realization' || result.name == 'caring' || result.name == 'disapproval' || result.name == 'approval') {
+          if (
+            result.name == 'neutral' ||
+            result.name == 'desire' ||
+            result.name == 'curiosity' ||
+            result.name == 'realization' ||
+            result.name == 'caring' ||
+            result.name == 'disapproval' ||
+            result.name == 'approval'
+          ) {
             type = 'neutral';
           }
-          //TODO: add the remaining 23 emotions
           return { ...result, type };
         });
 
-        // TODO: uncomment the following line to make the update effective
-        //this._emotions.next(updatedEmotions);
+        this._emotions.next(updatedEmotions);
       });
   }
 

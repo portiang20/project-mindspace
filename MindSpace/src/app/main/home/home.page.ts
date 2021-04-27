@@ -47,11 +47,13 @@ export class HomePage implements OnInit, OnDestroy {
       emotions = emotions.sort((a, b) => b.times - a.times);
       this.loadedEmotions = emotions.map((emotion) => {
         ///
-        let transformed_size = 25 + emotion.times/1.5 + '%';
+        let transformed_size = 25 + emotion.times / 1.5 + '%';
         ///
         return { ...emotion, size: transformed_size };
       });
       this.topFiveEmotions = this.loadedEmotions.slice(0, 5);
+      console.log(emotions);
+      console.log(this.topFiveEmotions);
     });
   }
 
