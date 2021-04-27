@@ -56,10 +56,10 @@
   <!-- emotion map end -->
 
   <div>
-    <h4>Scroll to show all emotions</h4>
+    <h4 style="margin-top: 2em;">Scroll to show all emotions</h4>
     <!-- emotion list start-->
     <ion-list>
-      <ion-item class="link" *ngFor="let e of topFiveEmotions">
+      <ion-item class="link" *ngFor="let e of loadedEmotions">
         <div class="dot" slot="start">
           <div *ngIf="e.type=='happy'" id="happyDot"></div>
           <div *ngIf="e.type=='excited'" id="excitedDot"></div>

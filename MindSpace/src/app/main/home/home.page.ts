@@ -16,16 +16,16 @@ export class HomePage implements OnInit, OnDestroy {
   topFiveEmotions: Emotion[] = [];
 
   circlesPos = [
-    { top: '10%', left: '37%' },
-    { top: '30%', left: '18%' },
-    { top: '30%', left: '56%' },
-    { top: '56%', left: '50%' },
-    { top: '56%', left: '27%' },
+    { top: '10%', left: '34%' },
+    { top: '30%', left: '15%' },
+    { top: '30%', left: '53%' },
+    { top: '56%', left: '47%' },
+    { top: '56%', left: '24%' },
   ];
 
   textPos = [
     { top: '-5%', left: '50%' },
-    { top: '50%', left: '-15%' },
+    { top: '48%', left: '-13%' },
     { top: '50%', left: '80%' },
     { top: '110%', left: '80%' },
     { top: '110%', left: '-15%' },
