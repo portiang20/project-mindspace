@@ -5,6 +5,35 @@
 </ion-header>
 
 <ion-content>
-  Show insights here
+  <ion-text>
+    <h1> Reflection</h1>
+  </ion-text>
+  <ion-text>
+    <h3>Today you feel </h3>
+    <div>
+      <span *ngFor="let tag of hashTags">
+        <span [ngSwitch]='tag.type'>
+          <span *ngSwitchCase="'happy'" class="happy"> #{{tag.name}}</span>
+          <span *ngSwitchCase="'excited'" class="excited"> #{{tag.name}}</span>
+          <span *ngSwitchCase="'sad'" class="sad"> #{{tag.name}}</span>
+          <span *ngSwitchCase="'anger'" class="anger"> #{{tag.name}}</span>
+          <span *ngSwitchCase="'fear'" class="fear"> #{{tag.name}}</span>
+          <span *ngSwitchCase="'disgust'" class="disgust"> #{{tag.name}}</span>
+          <span *ngSwitchDefault="'neutral'" class="neutral"> #{{tag.name}}</span>
+        </span>
+      </span>
+    </div>
+  </ion-text>
+  <ion-text>
+    <h3>Add Awareness </h3>
+    <p>Can you identify one or more causes of your emotion today?</p>
+  </ion-text>
+  <ion-item>
+    <!-- <ion-label position=" stacked"></ion-label> -->
+    <ion-textarea rows="8" required type="textarea" color="grey"
+      placeholder="Did something happen or did you have a thought that triggered what you are feeling? Compose your thoughts here...">
+    </ion-textarea>
+  </ion-item>
 
+  <ion-button color="success" expand="full" shape="round" (click)="onClickAdd()">Submit</ion-button>
 </ion-content>

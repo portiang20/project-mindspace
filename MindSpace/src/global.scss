@@ -27,17 +27,15 @@
 
 @import "https://use.fontawesome.com/releases/v5.5.0/css/all.css";
 
-// html,
-// body {
-//   // margin: 0;
-//   // padding: 0;
-//   // width: 100%;
-//   font-weight: 400;
-//   // height: 100%;
-//   font-family: "Poppins", sans-serif;
-// }
-* {
-}
+$base-color: #219653;
+$happy-color: purple;
+$excited-color: orange;
+$sad-color: blue;
+$anger-color: red;
+$fear-color: plum;
+$neutral-color: grey;
+$disgust-color: lightseagreen;
+
 html,
 body {
   font-weight: 400;
@@ -69,4 +67,30 @@ ion-button {
   display: block;
   margin: auto;
   border-radius: 50%;
+}
+
+span,
+p,
+div {
+  .happy {
+    color: $happy-color;
+  }
+  .sad {
+    color: $sad-color;
+  }
+  .fear {
+    color: $fear-color;
+  }
+  .anger {
+    color: $anger-color;
+  }
+  .excited {
+    color: $excited-color;
+  }
+  .disgust {
+    color: $disgust-color;
+  }
+  .neutral {
+    color: $neutral-color;
+  }
 }

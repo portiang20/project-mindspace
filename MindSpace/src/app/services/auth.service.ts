@@ -8,7 +8,7 @@ import {
 } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { take, map } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -25,7 +25,7 @@ export class AuthService {
     private router: Router,
     private http: HttpClient
   ) {
-    /* Saving user data in localstorage when
+    /* Saving user data in local storage when
     logged in and setting up null when logged out */
     this.afAuth.authState.subscribe((user) => {
       if (user) {
@@ -46,15 +46,6 @@ export class AuthService {
   googleAuth(): Promise<void> {
     return this.authLogin(new auth.GoogleAuthProvider());
   }
-
-  // From Eric: It is confirmed that it will not pass the token test in Django Server
-  // return google auth idToken for the use of Django
-  /*
-  getToken(result) {
-    console.log('Credential:', result.credential.idToken);
-    return result.credential.idToken;
-  }
-  */
 
   // Pass the returned token from FireAuth to django server for getting djangoToken
   getDjangoToken(
@@ -99,7 +90,6 @@ export class AuthService {
         this._djangoToken = djangoToken.token;
         localStorage.setItem('djangoToken', djangoToken.token);
         this.router.navigate(['/auth/dashboard']);
-        // this.router.navigate(['/main']);
       });
     } catch (error) {
       window.alert(error);
