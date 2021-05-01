@@ -1,12 +1,12 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Insights</ion-title>
+    <ion-title routerLink="/main/tabs/home">MindSpace</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-text>
-    <h1> Reflection</h1>
+    <h1> Insights</h1>
   </ion-text>
   <ion-text>
     <h3>Today you feel </h3>
@@ -19,21 +19,22 @@
           <span *ngSwitchCase="'anger'" class="anger"> #{{tag.name}}</span>
           <span *ngSwitchCase="'fear'" class="fear"> #{{tag.name}}</span>
           <span *ngSwitchCase="'disgust'" class="disgust"> #{{tag.name}}</span>
-          <span *ngSwitchDefault="'neutral'" class="neutral"> #{{tag.name}}</span>
+          <span *ngSwitchCase="'neutral'" class="neutral"> #{{tag.name}}</span>
         </span>
       </span>
     </div>
   </ion-text>
   <ion-text>
-    <h3>Add Awareness </h3>
+    <h3> Reflection </h3>
     <p>Can you identify one or more causes of your emotion today?</p>
+    <p>Did something happen?</p>
+    <p>Did you have a thought that triggered what you are feeling?</p>
   </ion-text>
   <ion-item>
-    <!-- <ion-label position=" stacked"></ion-label> -->
-    <ion-textarea rows="8" required type="textarea" color="grey"
-      placeholder="Did something happen or did you have a thought that triggered what you are feeling? Compose your thoughts here...">
+    <!-- <ion-label position="stacked">Compose your thoughts here...</ion-label> -->
+    <ion-textarea rows="6" required type="textarea" color="grey" placeholder="Compose your thoughts here...">
     </ion-textarea>
   </ion-item>
 
-  <ion-button color="success" expand="full" shape="round" (click)="onClickAdd()">Submit</ion-button>
+  <ion-button color="success" expand="full" shape="round" (click)="onClickAddAwareness()">Add Awareness</ion-button>
 </ion-content>

@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Emotion } from '../emotion.model';
 import { EmotionsService } from '../emotions.service';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-insights',
   templateUrl: './insights.page.html',
@@ -14,7 +15,10 @@ export class InsightsPage implements OnInit {
   emotionsSub: Subscription;
   loadedEmotions: Emotion[] = [];
 
-  constructor(private emotionsService: EmotionsService) {}
+  constructor(
+    private emotionsService: EmotionsService,
+    private route: Router
+  ) {}
 
   ngOnInit() {
     this.emotionsSub = this.emotionsService.emotions.subscribe((emotions) => {
@@ -25,12 +29,13 @@ export class InsightsPage implements OnInit {
         ///
         return { ...emotion, size: transformed_size };
       });
-      this.hashTags = this.loadedEmotions.slice(0, 5);
+      this.hashTags = this.loadedEmotions.slice(0, 10);
       console.log(this.hashTags);
     });
   }
 
-  onClickAdd() {
-    console.log('Submit ');
+  onClickAddAwareness() {
+    alert('Awareness has been submit');
+    this.route.navigateByUrl('auth');
   }
 }
