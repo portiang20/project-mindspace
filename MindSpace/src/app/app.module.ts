@@ -28,6 +28,9 @@ import { LoginModule } from './auth/auth/login/login.module';
 import { SignupModule } from './auth/auth/signup/signup.module';
 import { DjangoTokenInterceptor } from './_helper/django-tk.interceptor';
 
+//Calendar
+import { NgCalendarModule } from 'ionic2-calendar';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,6 +52,7 @@ import { DjangoTokenInterceptor } from './_helper/django-tk.interceptor';
     HttpClientModule,
     LoginModule,
     SignupModule,
+    NgCalendarModule,
   ],
   providers: [
     AuthService,

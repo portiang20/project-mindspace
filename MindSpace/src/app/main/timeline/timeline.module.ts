@@ -7,9 +7,17 @@ import { IonicModule } from '@ionic/angular';
 import { TimelinePageRoutingModule } from './timeline-routing.module';
 
 import { TimelinePage } from './timeline.page';
+import { NgCalendarModule } from 'ionic2-calendar';
 
 @NgModule({
-  imports: [CommonModule, FormsModule, IonicModule, TimelinePageRoutingModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    TimelinePageRoutingModule,
+    NgCalendarModule,
+  ],
   declarations: [TimelinePage],
+  entryComponents: [TimelinePage],
 })
 export class TimelinePageModule {}
