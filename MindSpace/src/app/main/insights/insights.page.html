@@ -12,7 +12,7 @@
     <h3>Today you feel </h3>
     <div>
       <span *ngFor="let tag of hashTags">
-        <span [ngSwitch]='tag.type'>
+        <span [ngSwitch]='tag.type' (click)='onClickHashtag(tag.name)'>
           <span *ngSwitchCase="'happy'" class="happy"> #{{tag.name}}</span>
           <span *ngSwitchCase="'excited'" class="excited"> #{{tag.name}}</span>
           <span *ngSwitchCase="'sad'" class="sad"> #{{tag.name}}</span>
@@ -25,6 +25,9 @@
     </div>
   </ion-text>
   <ion-text>
+    <p>Click on #tag to add your reflection</p>
+  </ion-text>
+  <ion-text>
     <h3> Reflection </h3>
     <p>Can you identify one or more causes of your emotion today?</p>
     <p>Did something happen?</p>
@@ -32,9 +35,11 @@
   </ion-text>
   <ion-item>
     <!-- <ion-label position="stacked">Compose your thoughts here...</ion-label> -->
-    <ion-textarea rows="6" required type="textarea" color="grey" placeholder="Compose your thoughts here...">
+    <ion-textarea required rows="6" typeht="textarea" color="grey" placeholder="Compose your thoughts here..."
+      #awareness>
     </ion-textarea>
   </ion-item>
 
-  <ion-button color="success" expand="full" shape="round" (click)="onClickAddAwareness()">Add Awareness</ion-button>
+  <ion-button color="success" expand="full" shape="round" (click)="onClickAddAwareness(awareness.value)">Add Awareness
+  </ion-button>
 </ion-content>

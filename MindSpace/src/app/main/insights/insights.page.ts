@@ -1,4 +1,3 @@
-import { HomePage } from './../home/home.page';
 import { Component, OnInit } from '@angular/core';
 import { Emotion } from '../emotion.model';
 import { EmotionsService } from '../emotions.service';
@@ -13,7 +12,10 @@ export class InsightsPage implements OnInit {
   hashTags: Emotion[] = [];
   emotions: Emotion[] = [];
   emotionsSub: Subscription;
-  loadedEmotions: Emotion[] = [];
+  awareness = {
+    content: '',
+    hashTag: '',
+  };
 
   constructor(
     private emotionsService: EmotionsService,
@@ -21,21 +23,25 @@ export class InsightsPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.emotionsSub = this.emotionsService.emotions.subscribe((emotions) => {
-      emotions = emotions.sort((a, b) => b.times - a.times);
-      this.loadedEmotions = emotions.map((emotion) => {
-        ///
-        let transformed_size = 25 + emotion.times / 1.5 + '%';
-        ///
-        return { ...emotion, size: transformed_size };
-      });
-      this.hashTags = this.loadedEmotions.slice(0, 10);
+    this.emotionsSub = this.emotionsService.emotions.subscribe((emos) => {
+      this.emotions = emos.sort((a, b) => b.times - a.times);
+
+      this.hashTags = this.emotions.slice(0, 10);
       console.log(this.hashTags);
     });
   }
 
-  onClickAddAwareness() {
-    alert('Awareness has been submit');
-    this.route.navigateByUrl('auth');
+  // TODO: post #message to database
+  onClickAddAwareness(content) {
+    this.awareness.content = content;
+    console.log(this.awareness);
+    console.log('Awareness has been submit');
+
+    this.route.navigateByUrl('main/tabs/explore');
+  }
+
+  onClickHashtag(tag) {
+    this.awareness.hashTag = tag;
+    console.log(this.awareness);
   }
 }
