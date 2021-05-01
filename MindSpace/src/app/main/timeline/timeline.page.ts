@@ -12,6 +12,7 @@ import { NavController } from '@ionic/angular';
 export class TimelinePage implements OnInit {
   eventSource;
   viewTitle;
+  calendarTitle: string;
 
   isToday: boolean;
   calendar = {
@@ -51,9 +52,9 @@ export class TimelinePage implements OnInit {
     public authService: AuthService
   ) {}
 
-  loadEvents() {
-    this.eventSource = this.createRandomEvents();
-  }
+  // loadEvents() {
+  //   // this.eventSource = this.createRandomEvents();
+  // }
 
   onViewTitleChanged(title) {
     this.viewTitle = title;

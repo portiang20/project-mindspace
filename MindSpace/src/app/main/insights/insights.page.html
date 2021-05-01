@@ -8,10 +8,6 @@
   <ion-text>
     <h1> Insights</h1>
     <p>Can you identify one or more causes of your emotion today?</p>
-  </ion-text>
-
-  <ion-text>
-    <h3>Today you feel </h3>
     <div>
       <span *ngFor="let tag of hashTags">
         <span [ngSwitch]='tag.type' (click)='onClickHashtag(tag.name)'>
@@ -31,6 +27,7 @@
     <ion-label position="floating">Click on #tag to add your reflection</ion-label>
     <ion-input type="text" [(ngModel)]="hashtag"> </ion-input>
   </ion-item>
+  <p>Did something happen or did you have a thought that triggered what you are feeling?</p>
   <ion-item>
     <!-- <ion-label position="stacked">Compose your thoughts here...</ion-label> -->
     <ion-textarea required rows="6" type="textarea" color="grey"

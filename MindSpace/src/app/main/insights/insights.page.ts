@@ -34,12 +34,13 @@ export class InsightsPage implements OnInit {
     console.log(this.awareness);
   }
 
-  // TODO: post #message to database
+  // Post hashtag & awareness to backend
   onClickAddAwareness(content: string) {
     this.awareness = content;
-    console.log(this.awareness);
 
     // TODO: post #hashtag + message to backend
+
+    console.log(this.awareness);
     console.log('Awareness has been submit');
 
     this.route.navigateByUrl('main/tabs/explore');
