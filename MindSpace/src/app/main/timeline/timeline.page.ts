@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { NgCalendarModule } from 'ionic2-calendar';
 import { CalendarMode, Step } from 'ionic2-calendar/calendar';
-import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-timeline',
@@ -12,7 +11,6 @@ import { NavController } from '@ionic/angular';
 export class TimelinePage implements OnInit {
   eventSource;
   viewTitle;
-  calendarTitle: string;
 
   isToday: boolean;
   calendar = {
@@ -47,14 +45,12 @@ export class TimelinePage implements OnInit {
     },
   };
 
-  constructor(
-    private navController: NavController,
-    public authService: AuthService
-  ) {}
+  constructor(public authService: AuthService) {}
 
-  // loadEvents() {
-  //   // this.eventSource = this.createRandomEvents();
-  // }
+  // TODO:Load event log from database
+  loadEvents() {
+    this.eventSource = {};
+  }
 
   onViewTitleChanged(title) {
     this.viewTitle = title;
@@ -71,23 +67,23 @@ export class TimelinePage implements OnInit {
     );
   }
 
-  changeMode(mode) {
-    this.calendar.mode = mode;
-  }
-
   today() {
     this.calendar.currentDate = new Date();
+    console.log('Date:', this.calendar.currentDate);
   }
 
-  onTimeSelected(ev) {
-    console.log(
-      'Selected time: ' +
-        ev.selectedTime +
-        ', hasEvents: ' +
-        (ev.events !== undefined && ev.events.length !== 0) +
-        ', disabled: ' +
-        ev.disabled
+  prev() {
+    this.calendar.currentDate.setMonth(
+      this.calendar.currentDate.getMonth() - 1
     );
+    console.log('Date:', this.calendar.currentDate);
+  }
+
+  next() {
+    this.calendar.currentDate.setMonth(
+      this.calendar.currentDate.getMonth() + 1
+    );
+    console.log('Date:', this.calendar.currentDate);
   }
 
   onCurrentDateChanged(event: Date) {
@@ -103,7 +99,7 @@ export class TimelinePage implements OnInit {
       var date = new Date();
       var eventType = Math.floor(Math.random() * 2);
       var startDay = Math.floor(Math.random() * 90) - 45;
-      var endDay = Math.floor(Math.random() * 2) + startDay;
+      var endDay = startDay;
       var startTime;
       var endTime;
       if (eventType === 0) {
@@ -157,18 +153,6 @@ export class TimelinePage implements OnInit {
     }
     return events;
   }
-
-  onRangeChanged(ev) {
-    console.log(
-      'range changed: startTime: ' + ev.startTime + ', endTime: ' + ev.endTime
-    );
-  }
-
-  markDisabled = (date: Date) => {
-    var current = new Date();
-    current.setHours(0, 0, 0);
-    return date < current;
-  };
 
   ngOnInit() {}
 }
