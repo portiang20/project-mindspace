@@ -7,7 +7,9 @@
 <ion-content>
   <ion-text>
     <h1> Insights</h1>
+    <p>Can you identify one or more causes of your emotion today?</p>
   </ion-text>
+
   <ion-text>
     <h3>Today you feel </h3>
     <div>
@@ -24,21 +26,18 @@
       </span>
     </div>
   </ion-text>
-  <ion-text>
-    <p>Click on #tag to add your reflection</p>
-  </ion-text>
-  <ion-text>
-    <h3> Reflection </h3>
-    <p>Can you identify one or more causes of your emotion today?</p>
-    <p>Did something happen?</p>
-    <p>Did you have a thought that triggered what you are feeling?</p>
-  </ion-text>
+
+  <ion-item>
+    <ion-label position="floating">Click on #tag to add your reflection</ion-label>
+    <ion-input type="text" [(ngModel)]="hashtag"> </ion-input>
+  </ion-item>
   <ion-item>
     <!-- <ion-label position="stacked">Compose your thoughts here...</ion-label> -->
-    <ion-textarea required rows="6" typeht="textarea" color="grey" placeholder="Compose your thoughts here..."
-      #awareness>
+    <ion-textarea required rows="6" type="textarea" color="grey"
+      placeholder="Did something happen? Compose your thoughts here..." #awareness>
     </ion-textarea>
   </ion-item>
+
 
   <ion-button color="success" expand="full" shape="round" (click)="onClickAddAwareness(awareness.value)">Add Awareness
   </ion-button>

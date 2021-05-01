@@ -12,10 +12,8 @@ export class InsightsPage implements OnInit {
   hashTags: Emotion[] = [];
   emotions: Emotion[] = [];
   emotionsSub: Subscription;
-  awareness = {
-    content: '',
-    hashTag: '',
-  };
+  awareness: string = '';
+  hashtag: string = '';
 
   constructor(
     private emotionsService: EmotionsService,
@@ -31,17 +29,19 @@ export class InsightsPage implements OnInit {
     });
   }
 
-  // TODO: post #message to database
-  onClickAddAwareness(content) {
-    this.awareness.content = content;
+  onClickHashtag(tagName) {
+    this.hashtag = '#' + tagName;
     console.log(this.awareness);
+  }
+
+  // TODO: post #message to database
+  onClickAddAwareness(content: string) {
+    this.awareness = content;
+    console.log(this.awareness);
+
+    // TODO: post #hashtag + message to backend
     console.log('Awareness has been submit');
 
     this.route.navigateByUrl('main/tabs/explore');
-  }
-
-  onClickHashtag(tag) {
-    this.awareness.hashTag = tag;
-    console.log(this.awareness);
   }
 }
