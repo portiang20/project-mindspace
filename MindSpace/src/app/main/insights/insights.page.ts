@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Emotion } from '../emotion.model';
 import { EmotionsService } from '../emotions.service';
 import { Subscription } from 'rxjs';
-import { Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
 @Component({
   selector: 'app-insights',
   templateUrl: './insights.page.html',
@@ -13,11 +13,11 @@ export class InsightsPage implements OnInit {
   emotions: Emotion[] = [];
   emotionsSub: Subscription;
   awareness: string = '';
-  hashtag: string = '';
+  @Input() hashtag;
 
   constructor(
     private emotionsService: EmotionsService,
-    private route: Router
+    private modalCtrl: ModalController
   ) {}
 
   ngOnInit() {
@@ -28,18 +28,24 @@ export class InsightsPage implements OnInit {
     });
   }
 
-  onClickHashtag(tagName) {
-    this.hashtag = '#' + tagName;
+  onClickHashtag(tag: Emotion) {
+    this.hashtag = tag;
   }
 
-  // Post hashtag & awareness to backend
-  onClickAddAwareness(content: string) {
+  // Post hashtag & awareness
+  async onClickAddAwareness(content: string) {
     this.awareness = content;
 
-    // TODO: post #hashtag + message to backend
+    // TODO: post #hashtag + awareness to backend
 
-    console.log('Awareness has been submit');
+    // dismiss this modal and deliver data to explore
+    await this.modalCtrl.dismiss({
+      hashtag: this.hashtag,
+      awareness: this.awareness,
+    });
+  }
 
-    this.route.navigateByUrl('main/tabs/explore');
+  async dismiss() {
+    await this.modalCtrl.dismiss();
   }
 }

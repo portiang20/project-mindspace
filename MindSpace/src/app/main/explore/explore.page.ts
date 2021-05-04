@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Emotion } from './../emotion.model';
+import { InsightsPage } from './../insights/insights.page';
+import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { IonRouterOutlet, ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-explore',
@@ -6,9 +10,31 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./explore.page.scss'],
 })
 export class ExplorePage implements OnInit {
-  title: string = 'Explore';
+  title: string = 'Explore XXX Emotion';
+  insights = null;
 
-  constructor() {}
+  constructor(
+    private route: Router,
+    public modalCtrl: ModalController,
+    private routerOutlet: IonRouterOutlet
+  ) {}
+
+  // present insights modal
+  async presentInsightsModal() {
+    const modal = await this.modalCtrl.create({
+      component: InsightsPage,
+      swipeToClose: true,
+      presentingElement: this.routerOutlet.nativeEl,
+    });
+    await modal.present();
+    modal.onDidDismiss().then((res) => {
+      this.insights = res.data;
+    });
+  }
 
   ngOnInit() {}
+
+  onClickInsights() {
+    this.route.navigateByUrl('main/tabs/insights');
+  }
 }

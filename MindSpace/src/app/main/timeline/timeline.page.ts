@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
-import { NgCalendarModule } from 'ionic2-calendar';
 import { CalendarMode, Step } from 'ionic2-calendar/calendar';
+import { CalendarComponent } from 'ionic2-calendar';
 
 @Component({
   selector: 'app-timeline',
@@ -9,10 +9,12 @@ import { CalendarMode, Step } from 'ionic2-calendar/calendar';
   styleUrls: ['./timeline.page.scss'],
 })
 export class TimelinePage implements OnInit {
-  eventSource;
-  viewTitle;
-
+  @ViewChild(CalendarComponent) myCalendar: CalendarComponent;
+  eventSource = [];
+  viewTitle: string;
   isToday: boolean;
+  selectedDate: Date;
+
   calendar = {
     mode: 'month' as CalendarMode,
     step: 30 as Step,
@@ -49,7 +51,7 @@ export class TimelinePage implements OnInit {
 
   // TODO:Load event log from database
   loadEvents() {
-    this.eventSource = {};
+    this.eventSource = this.createRandomEvents();
   }
 
   onViewTitleChanged(title) {
@@ -72,18 +74,14 @@ export class TimelinePage implements OnInit {
     console.log('Date:', this.calendar.currentDate);
   }
 
-  prev() {
-    this.calendar.currentDate.setMonth(
-      this.calendar.currentDate.getMonth() - 1
-    );
-    console.log('Date:', this.calendar.currentDate);
+  slidePrev() {
+    this.myCalendar.slidePrev();
+    this.myCalendar.update();
   }
 
-  next() {
-    this.calendar.currentDate.setMonth(
-      this.calendar.currentDate.getMonth() + 1
-    );
-    console.log('Date:', this.calendar.currentDate);
+  slideNext() {
+    this.myCalendar.slideNext();
+    this.myCalendar.update();
   }
 
   onCurrentDateChanged(event: Date) {
@@ -152,6 +150,10 @@ export class TimelinePage implements OnInit {
       }
     }
     return events;
+  }
+
+  removeEvents() {
+    this.eventSource = [];
   }
 
   ngOnInit() {}

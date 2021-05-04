@@ -5,5 +5,21 @@
 </ion-header>
 
 <ion-content>
-  Display single emotion analysis here
+  <ion-text color="success">
+    <h1>Display single emotion analysis here</h1>
+  </ion-text>
+
+
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="presentInsightsModal()">
+      <ion-icon name="create-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <!-- <ion-button color="success" expand="full" shape="round">Add Awareness</ion-button> -->
+  <ion-text *ngIf='insights'>
+    <h4>Awareness on {{insights.hashtag.name}}</h4>
+    <p>{{insights.awareness}}</p>
+  </ion-text>
 </ion-content>
