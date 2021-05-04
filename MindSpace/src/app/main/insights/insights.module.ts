@@ -9,12 +9,7 @@ import { InsightsPageRoutingModule } from './insights-routing.module';
 import { InsightsPage } from './insights.page';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    InsightsPageRoutingModule
-  ],
-  declarations: [InsightsPage]
+  imports: [CommonModule, FormsModule, IonicModule, InsightsPageRoutingModule],
+  declarations: [InsightsPage],
 })
 export class InsightsPageModule {}
