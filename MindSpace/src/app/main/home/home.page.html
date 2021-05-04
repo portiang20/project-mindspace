@@ -33,7 +33,7 @@
     <h4 style="margin-top: 2em;">Scroll to show all emotions</h4>
     <!-- emotion list start-->
     <ion-list>
-      <ion-item class="link" *ngFor="let e of loadedEmotions">
+      <ion-item class="link" *ngFor="let e of topFiveEmotions">
         <div class="dot" slot="start">
           <div [id]="e.type"></div>
         </div>
