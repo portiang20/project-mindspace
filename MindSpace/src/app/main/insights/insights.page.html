@@ -11,36 +11,31 @@
 
 <ion-content>
   <ion-text>
+    <h4 [class]='hashtag.type'> Reflection on #{{hashtag.name}}</h4>
     <p>Can you identify one or more causes of your emotion today?</p>
-    <h4>Today You Feel</h4>
-    <!-- display top 10 emotions as hashtags -->
+  </ion-text>
+
+  <ion-text *ngIf='hashtag'>
+    <p>Did something happen or did you have a thought that triggered what you are feeling?</p>
+  </ion-text>
+
+  <ion-item>
+    <ion-textarea required rows="6" type="textarea" color="grey" placeholder="Compose your thoughts here..." #awareness>
+    </ion-textarea>
+  </ion-item>
+
+  <ion-text color="medium">
+    <p>Click on #hashtag to reflect other emotions</p>
+    <p>Today You Feel</p>
     <div class="center">
       <span *ngFor="let hashtag of hashTags">
         <span [class]='hashtag.type' (click)='onClickHashtag(hashtag)'> #{{hashtag.name}}</span>
       </span>
     </div>
   </ion-text>
-
-  <ion-text color="medium">
-    <p>Click on #hashtag to start your reflection</p>
-  </ion-text>
-
-  <ion-text *ngIf='hashtag'>
-    <h4 [class]='hashtag.type'> Reflection on #{{hashtag.name}}</h4>
-
-    <ion-text color="medium">
-      <p>Did something happen or did you have a thought that triggered what you are feeling?</p>
-    </ion-text>
-
-    <ion-item>
-      <ion-textarea required rows="6" type="textarea" color="grey"
-        placeholder="Did something happen? Compose your thoughts here..." #awareness>
-      </ion-textarea>
-    </ion-item>
-
-    <ion-button color="success" expand="full" shape="round" (click)="onClickAddAwareness(awareness.value)">Add
-      Awareness
-    </ion-button>
-  </ion-text>
+  <!-- display top 10 emotions as hashtags -->
+  <ion-button color="success" expand="full" shape="round" (click)="onClickAddAwareness(awareness.value)">Add
+    Awareness
+  </ion-button>
 
 </ion-content>

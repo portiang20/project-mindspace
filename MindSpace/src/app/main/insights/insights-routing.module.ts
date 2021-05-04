@@ -1,16 +1,16 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+// import { NgModule } from '@angular/core';
+// import { Routes, RouterModule } from '@angular/router';
 
-import { InsightsPage } from './insights.page';
+// import { InsightsPage } from './insights.page';
 
-const routes: Routes = [
-  {
-    path: '',
-    component: InsightsPage
-  }
-];
-@NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
-})
-export class InsightsPageRoutingModule {}
+// const routes: Routes = [
+//   {
+//     path: '',
+//     component: InsightsPage
+//   }
+// ];
+// @NgModule({
+//   imports: [RouterModule.forChild(routes)],
+//   exports: [RouterModule],
+// })
+// export class InsightsPageRoutingModule {}

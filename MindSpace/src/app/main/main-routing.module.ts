@@ -30,13 +30,13 @@ const routes: Routes = [
           import('./home/home.module').then((m) => m.HomePageModule),
         canActivate: [AuthGuard],
       },
-      {
-        path: 'insights',
-        loadChildren: () =>
-          import('./insights/insights.module').then(
-            (m) => m.InsightsPageModule
-          ),
-      },
+      // {
+      //   path: 'insights',
+      //   loadChildren: () =>
+      //     import('./insights/insights.module').then(
+      //       (m) => m.InsightsPageModule
+      //     ),
+      // },
       {
         path: 'strategies',
         loadChildren: () =>

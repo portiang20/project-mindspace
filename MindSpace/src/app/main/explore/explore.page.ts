@@ -1,7 +1,7 @@
 import { Emotion } from './../emotion.model';
 import { InsightsPage } from './../insights/insights.page';
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { IonRouterOutlet, ModalController } from '@ionic/angular';
 
 @Component({
@@ -10,14 +10,22 @@ import { IonRouterOutlet, ModalController } from '@ionic/angular';
   styleUrls: ['./explore.page.scss'],
 })
 export class ExplorePage implements OnInit {
-  title: string = 'Explore XXX Emotion';
+  title: string = 'Explore';
   insights = null;
+  emoTitle;
 
   constructor(
     private route: Router,
     public modalCtrl: ModalController,
-    private routerOutlet: IonRouterOutlet
+    private routerOutlet: IonRouterOutlet,
+    private activeRoute: ActivatedRoute
   ) {}
+
+  ngOnInit() {
+    this.activeRoute.params.subscribe((param) => {
+      this.emoTitle = param['id'];
+    });
+  }
 
   // show insights modal
   async showInsightsModal() {
@@ -25,12 +33,13 @@ export class ExplorePage implements OnInit {
       component: InsightsPage,
       swipeToClose: true,
       presentingElement: this.routerOutlet.nativeEl,
+      componentProps: {
+        emo: this.emoTitle,
+      },
     });
     await modal.present();
     modal.onDidDismiss().then((res) => {
       this.insights = res.data;
     });
   }
-
-  ngOnInit() {}
 }

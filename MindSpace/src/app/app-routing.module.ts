@@ -1,5 +1,5 @@
 import { NotfoundComponent } from './notfound/notfound.component';
-import { NgModule, Component } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
@@ -18,15 +18,6 @@ const routes: Routes = [
     loadChildren: () =>
       import('./auth/auth/auth.module').then((m) => m.AuthPageModule),
   },
-  /*
-  {
-    path: 'dashboard',
-    component: DashboardComponent,
-    canActivate: [AuthGuard],
-  },
-  { path: 'forgot-password', component: ForgotPasswordComponent },
-  { path: 'verify-email-address', component: VerifyEmailComponent },
-  */
   {
     path: 'main',
     loadChildren: () =>

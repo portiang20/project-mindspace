@@ -13,7 +13,8 @@ export class InsightsPage implements OnInit {
   emotions: Emotion[] = [];
   emotionsSub: Subscription;
   awareness: string = '';
-  @Input() hashtag;
+  @Input() emo: string;
+  hashtag;
 
   constructor(
     private emotionsService: EmotionsService,
@@ -26,6 +27,13 @@ export class InsightsPage implements OnInit {
       this.hashTags = this.emotions.slice(0, 10);
       console.log('Hashtags for today:', this.hashTags);
     });
+
+    this.hashtag = {
+      name: this.emo,
+    };
+
+    this.onClickHashtag(this.hashtag);
+    console.log(this.hashtag);
   }
 
   onClickHashtag(tag: Emotion) {

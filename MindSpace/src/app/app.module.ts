@@ -1,4 +1,3 @@
-import { AlertComponent } from './alert/alert.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouteReuseStrategy } from '@angular/router';
@@ -11,9 +10,6 @@ import { NotfoundComponent } from './notfound/notfound.component';
 
 // App components
 import { AppComponent } from './app.component';
-import { DashboardComponent } from './auth/dashboard/dashboard.component';
-import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
-import { VerifyEmailComponent } from './auth/verify-email/verify-email.component';
 
 // Firebase services + environment module
 import { AngularFireModule } from '@angular/fire';
@@ -24,22 +20,10 @@ import { environment } from '../environments/environment';
 // Auth service
 import { AuthService } from './services/auth.service';
 import { ReactiveFormsModule } from '@angular/forms';
-import { LoginModule } from './auth/auth/login/login.module';
-import { SignupModule } from './auth/auth/signup/signup.module';
 import { DjangoTokenInterceptor } from './_helper/django-tk.interceptor';
 
-//Calendar
-import { NgCalendarModule } from 'ionic2-calendar';
-
 @NgModule({
-  declarations: [
-    AppComponent,
-    AlertComponent,
-    NotfoundComponent,
-    DashboardComponent,
-    ForgotPasswordComponent,
-    VerifyEmailComponent,
-  ],
+  declarations: [AppComponent, NotfoundComponent],
   entryComponents: [],
   imports: [
     BrowserModule,
@@ -50,9 +34,6 @@ import { NgCalendarModule } from 'ionic2-calendar';
     AngularFirestoreModule,
     ReactiveFormsModule,
     HttpClientModule,
-    LoginModule,
-    SignupModule,
-    NgCalendarModule,
   ],
   providers: [
     AuthService,

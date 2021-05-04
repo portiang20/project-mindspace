@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { TimelinePageRoutingModule } from './timeline-routing.module';
 
 import { TimelinePage } from './timeline.page';
+//Calendar
 import { NgCalendarModule } from 'ionic2-calendar';
 
 @NgModule({
