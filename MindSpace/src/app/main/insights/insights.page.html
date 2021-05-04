@@ -8,34 +8,28 @@
   <ion-text>
     <h1> Insights</h1>
     <p>Can you identify one or more causes of your emotion today?</p>
+    <h4>Today You Feel</h4>
     <div>
       <span *ngFor="let tag of hashTags">
-        <span [ngSwitch]='tag.type' (click)='onClickHashtag(tag.name)'>
-          <span *ngSwitchCase="'happy'" class="happy"> #{{tag.name}}</span>
-          <span *ngSwitchCase="'excited'" class="excited"> #{{tag.name}}</span>
-          <span *ngSwitchCase="'sad'" class="sad"> #{{tag.name}}</span>
-          <span *ngSwitchCase="'anger'" class="anger"> #{{tag.name}}</span>
-          <span *ngSwitchCase="'fear'" class="fear"> #{{tag.name}}</span>
-          <span *ngSwitchCase="'disgust'" class="disgust"> #{{tag.name}}</span>
-          <span *ngSwitchCase="'neutral'" class="neutral"> #{{tag.name}}</span>
-        </span>
+        <span [class]='tag.type' (click)='onClickHashtag(tag.name)'> #{{tag.name}}</span>
       </span>
     </div>
   </ion-text>
+  <ion-text color="medium">
+    <p class="center">Click on #tag to start your reflection</p>
+  </ion-text>
+  <ion-text *ngIf='hashtag'>
+    <h4> Reflection on {{hashtag}}</h4>
+    <p>Did something happen or did you have a thought that triggered what you are feeling?</p>
+    <ion-item>
+      <ion-textarea required rows="6" type="textarea" color="grey"
+        placeholder="Did something happen? Compose your thoughts here..." #awareness>
+      </ion-textarea>
+    </ion-item>
 
-  <ion-item>
-    <ion-label position="floating">Click on #tag to add your reflection</ion-label>
-    <ion-input type="text" [(ngModel)]="hashtag"> </ion-input>
-  </ion-item>
-  <p>Did something happen or did you have a thought that triggered what you are feeling?</p>
-  <ion-item>
-    <!-- <ion-label position="stacked">Compose your thoughts here...</ion-label> -->
-    <ion-textarea required rows="6" type="textarea" color="grey"
-      placeholder="Did something happen? Compose your thoughts here..." #awareness>
-    </ion-textarea>
-  </ion-item>
+    <ion-button color="success" expand="full" shape="round" (click)="onClickAddAwareness(awareness.value)">Add
+      Awareness
+    </ion-button>
 
-
-  <ion-button color="success" expand="full" shape="round" (click)="onClickAddAwareness(awareness.value)">Add Awareness
-  </ion-button>
+  </ion-text>
 </ion-content>

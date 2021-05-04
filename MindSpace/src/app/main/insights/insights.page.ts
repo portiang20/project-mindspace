@@ -23,15 +23,13 @@ export class InsightsPage implements OnInit {
   ngOnInit() {
     this.emotionsSub = this.emotionsService.emotions.subscribe((emos) => {
       this.emotions = emos.sort((a, b) => b.times - a.times);
-
       this.hashTags = this.emotions.slice(0, 10);
-      console.log(this.hashTags);
+      console.log('Hashtags for today:', this.hashTags);
     });
   }
 
   onClickHashtag(tagName) {
     this.hashtag = '#' + tagName;
-    console.log(this.awareness);
   }
 
   // Post hashtag & awareness to backend
@@ -40,7 +38,6 @@ export class InsightsPage implements OnInit {
 
     // TODO: post #hashtag + message to backend
 
-    console.log(this.awareness);
     console.log('Awareness has been submit');
 
     this.route.navigateByUrl('main/tabs/explore');
