@@ -19,8 +19,8 @@ export class ExplorePage implements OnInit {
     private routerOutlet: IonRouterOutlet
   ) {}
 
-  // present insights modal
-  async presentInsightsModal() {
+  // show insights modal
+  async showInsightsModal() {
     const modal = await this.modalCtrl.create({
       component: InsightsPage,
       swipeToClose: true,
@@ -33,8 +33,4 @@ export class ExplorePage implements OnInit {
   }
 
   ngOnInit() {}
-
-  onClickInsights() {
-    this.route.navigateByUrl('main/tabs/insights');
-  }
 }

@@ -6,18 +6,20 @@
 
 <ion-content>
   <ion-text color="success">
-    <h1>Display single emotion analysis here</h1>
+    <h1>Display single emotion analysis</h1>
   </ion-text>
 
-
-
+  <!-- method 1 floating button to show insights modal-->
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button (click)="presentInsightsModal()">
+    <ion-fab-button (click)="showInsightsModal()">
       <ion-icon name="create-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 
-  <!-- <ion-button color="success" expand="full" shape="round">Add Awareness</ion-button> -->
+  <!-- method 2 use fixed button to show insights modal -->
+  <ion-button color="success" expand="full" shape="round" (click)="showInsightsModal()">Add Awareness</ion-button>
+
+  <!-- display added awareness -->
   <ion-text *ngIf='insights'>
     <h4>Awareness on {{insights.hashtag.name}}</h4>
     <p>{{insights.awareness}}</p>
