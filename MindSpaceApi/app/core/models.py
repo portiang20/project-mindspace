@@ -1,8 +1,21 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from django.db.models.signals import post_save
 
-#Recommended way to retreive settings
+# Recommended way to retreive settings
 from django.conf import settings
+
+# For computing trigger keywords frequency
+import nltk
+from nltk.tokenize import TweetTokenizer
+# For stop words removal
+nltk.download('stopwords')
+from nltk.corpus import stopwords
+# For lemmatization
+nltk.download('wordnet')
+from nltk import stem
+# For counting
+from collections import Counter
 
 class UserManager(BaseUserManager):
 
@@ -54,7 +67,6 @@ class Record(models.Model):
     def __str__(self):
         return self.emotion + ' (Posted on: ' + self.posted_date.strftime('%Y-%m-%d') + ')'
 
-# Create your models here.
 class Insight(models.Model):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
@@ -68,6 +80,50 @@ class Insight(models.Model):
     def __str__(self):
         return self.tag + ' (Posted on: ' + self.posted_date.strftime('%Y-%m-%d') + ')'
 
+class TriggerKeywordDefinition(models.Model):
+    emotion = models.CharField(max_length=255)
+    keyword = models.CharField(max_length=255)
+    
+    # string representation
+    def __str__(self):
+        return self.emotion + ' - ' + self.keyword 
 
+class TriggerKeywordFrequency(models.Model):
+    record = models.ForeignKey(
+        Record, 
+        on_delete=models.CASCADE
+    )
+    keyword = models.CharField(max_length=255)
+    frequency = models.IntegerField()
+
+    # string representation
+    def __str__(self):
+        return self.record.emotion + ' - ' + self.keyword + ' (' + str(self.frequency) + ')'
+
+
+# Function for updating keyword freqency
+def create_keyword_frequency_from_record(sender, instance, **kwargs):
+    # Retrieve trigger keywords
+    keywords = TriggerKeywordDefinition.objects.filter(emotion=instance.emotion)
+    
+    if len(keywords) > 0:
+        tweet_tokenizer = TweetTokenizer()
+        tokens = tweet_tokenizer.tokenize(instance.post)
+        # Stop word removal
+        filtered_tokens = []
+        sw_set = set(stopwords.words('english'))
+        for token in tokens:
+            if token not in sw_set:
+                filtered_tokens.append(token)
+        # Lemmatization
+        lemmatizer = stem.WordNetLemmatizer()
+        filtered_tokens = [lemmatizer.lemmatize(token) for token in tokens]
+        filtered_tokens_counter = Counter(filtered_tokens)
+        for keywordObj in keywords:
+            keyword = keywordObj.keyword
+            lemmatized_keyword = lemmatizer.lemmatize(keyword)
+            if lemmatized_keyword in filtered_tokens_counter:
+                TriggerKeywordFrequency.objects.create(record=instance, keyword=keyword, frequency=filtered_tokens_counter[lemmatized_keyword])
         
 
+post_save.connect(create_keyword_frequency_from_record, sender=Record)
