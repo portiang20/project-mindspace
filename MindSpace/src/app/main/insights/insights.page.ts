@@ -23,8 +23,8 @@ export class InsightsPage implements OnInit {
 
   ngOnInit() {
     this.emotionsSub = this.emotionsService.emotions.subscribe((emos) => {
-      this.emotions = emos.sort((a, b) => b.times - a.times);
-      this.hashTags = this.emotions.slice(0, 10);
+      //this.emotions = emos.sort((a, b) => b.times - a.times);
+      //this.hashTags = this.emotions.slice(0, 10);
       console.log('Hashtags for today:', this.hashTags);
     });
 
