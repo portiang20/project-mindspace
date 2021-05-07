@@ -1,4 +1,5 @@
-import { NgModule } from '@angular/core';
+import { ArticleComponent } from './article/article.component';
+import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { StrategiesPage } from './strategies.page';
@@ -7,6 +8,11 @@ const routes: Routes = [
   {
     path: '',
     component: StrategiesPage
+  },
+  {
+    path: ':articleID',
+    //loadChildren:'./article/article.component.module#ArticleModule',
+    component: ArticleComponent
   }
 ];
 
@@ -14,4 +20,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class StrategiesPageRoutingModule {}
+export class StrategiesPageRoutingModule { }

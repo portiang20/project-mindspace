@@ -1,8 +1,8 @@
-export interface Articles {
+export interface Article {
   title: string;
   content: string;
   tag: string;
   type: string;
   imgPath: string;
-  articlePath: string;
+  articleID: string;
 }
