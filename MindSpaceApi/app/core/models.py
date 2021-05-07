@@ -54,6 +54,20 @@ class Record(models.Model):
     def __str__(self):
         return self.emotion + ' (Posted on: ' + self.posted_date.strftime('%Y-%m-%d') + ')'
 
+# Create your models here.
+class Insight(models.Model):
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+    )
+    reflection = models.TextField()
+    posted_date = models.DateField()
+    tag = models.CharField(max_length=255)
+    
+    # string representation
+    def __str__(self):
+        return self.tag + ' (Posted on: ' + self.posted_date.strftime('%Y-%m-%d') + ')'
+
 
         
 
