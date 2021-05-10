@@ -18,11 +18,13 @@ const routes: Routes = [
         path: 'explore/:id',
         loadChildren: () =>
           import('./explore/explore.module').then((m) => m.ExplorePageModule),
+        canActivate: [AuthGuard],
       },
       {
         path: 'explore',
         loadChildren: () =>
           import('./explore/explore.module').then((m) => m.ExplorePageModule),
+        canActivate: [AuthGuard],
       },
       {
         path: 'home',
@@ -50,6 +52,7 @@ const routes: Routes = [
           import('./timeline/timeline.module').then(
             (m) => m.TimelinePageModule
           ),
+        canActivate: [AuthGuard],
       },
     ],
   },
