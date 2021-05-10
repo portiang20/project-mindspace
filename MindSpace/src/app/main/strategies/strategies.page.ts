@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { Articles } from './../../articles.model';
-import { ArticlesService } from './../../articles.service';
+import { ArticlePage } from './article/article';
+import { ActivatedRoute, Routes, Router, RouterModule, NavigationExtras } from '@angular/router';
+import { Component, OnInit, NgModule } from '@angular/core';
+import { Article } from './article.model';
+import { ArticleService } from './article.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-strategies',
@@ -8,13 +11,14 @@ import { ArticlesService } from './../../articles.service';
   styleUrls: ['./strategies.page.scss'],
 })
 export class StrategiesPage implements OnInit {
-  loadedArticles: Articles[];
+  loadedArticles: Article[];
 
-  constructor(private articlesService: ArticlesService) {}
+  //index: number;
 
-  ngOnInit() {}
+  constructor(private articleService: ArticleService) { }
 
-  ionViewWillEnter() {
-    this.loadedArticles = this.articlesService.articles;
+  ngOnInit() {
+    this.loadedArticles = this.articleService.getAllArticles();
   }
 }
+

@@ -1,3 +1,5 @@
+import { ArticleListItemComponent } from './articleList/article-list-item.component';
+import { ArticlePage } from './article/article';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -15,6 +17,6 @@ import { StrategiesPage } from './strategies.page';
     IonicModule,
     StrategiesPageRoutingModule
   ],
-  declarations: [StrategiesPage]
+  declarations: [StrategiesPage, ArticleListItemComponent]
 })
 export class StrategiesPageModule {}
