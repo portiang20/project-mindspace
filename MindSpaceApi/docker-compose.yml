@@ -56,7 +56,7 @@ services:
 #For running command one time for a particular running service, follow the following example:
 # docker-compose run --rm app sh -c "django-admin startproject app ."
 #   (Start a now project "app" at the working directory defined in Dockerfile)
-# docker-compose run --rm app sh -c "python manage.py createapp [appname]"
+# docker-compose run --rm app sh -c "python manage.py startapp [appname]"
 #   (Create a new app in Django )
 # docker-compose run --rm app sh -c "python manage.py createsuperuser"
 #   (Create a superuser for the application)

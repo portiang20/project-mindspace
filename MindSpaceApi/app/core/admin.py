@@ -25,3 +25,6 @@ class UserAdmin(BaseUserAdmin):
 
 admin.site.register(models.User, UserAdmin)
 admin.site.register(models.Record)
+admin.site.register(models.Insight)
+admin.site.register(models.TriggerKeywordDefinition)
+admin.site.register(models.TriggerKeywordFrequency)

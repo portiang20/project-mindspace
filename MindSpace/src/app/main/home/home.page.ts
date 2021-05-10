@@ -43,8 +43,87 @@ export class HomePage implements OnInit, OnDestroy {
   ngOnInit() {
     //Now emotions becomes an observable object
     //  with .subscribe(), the callback function will run everytime when _emotions is updated
-    this.emotionsSub = this.emotionsService.emotions.subscribe((emotions) => {
-      emotions = emotions.sort((a, b) => b.times - a.times);
+    this.emotionsSub = this.emotionsService.emotions.subscribe((records) => {
+      //First, convert from server format to:
+      //  {'emotion1':[freq1], 'emotion2':[freq2], ...}
+      let emotionsCount = records.reduce((emotions, record) => {
+        emotions[record.emotion]
+          ? emotions[record.emotion]++
+          : (emotions[record.emotion] = 1);
+        return emotions;
+      }, {});
+
+      console.log(emotionsCount);
+      //Then, convert {'emotion1':[freq1], 'emotion2':[freq2], ...} to:
+      //  [{id:1, name:'emotion1', times: [freq1]},
+      //   {id:2, name:'emotion2', times: [freq2]}]
+      let results = Object.keys(emotionsCount).map((emotion, index) => {
+        return {
+          id: index.toString(),
+          name: emotion,
+          times: emotionsCount[emotion],
+        };
+      });
+
+      console.log(results);
+
+      let updatedEmotions: Emotion[] = results.map((result) => {
+        let type = '';
+        if (
+          result.name == 'joy' ||
+          result.name == 'happy' ||
+          result.name == 'gratitude' ||
+          result.name == 'admiration' ||
+          result.name == 'optimism' ||
+          result.name == 'relief' ||
+          result.name == 'love'
+        ) {
+          type = 'happy';
+        }
+        if (
+          result.name == 'sadness' ||
+          result.name == 'grief' ||
+          result.name == 'remorse' ||
+          result.name == 'disappointment'
+        ) {
+          type = 'sad';
+        }
+        if (result.name == 'anger' || result.name == 'annoyance') {
+          type = 'anger';
+        }
+        if (result.name == 'fear' || result.name == 'nervousness') {
+          type = 'fear';
+        }
+        if (
+          result.name == 'disgust' ||
+          result.name == 'embarrass' ||
+          result.name == 'confusion'
+        ) {
+          type = 'disgust';
+        }
+        if (
+          result.name == 'surprise' ||
+          result.name == 'excitement' ||
+          result.name == 'amusement' ||
+          result.name == 'pride'
+        ) {
+          type = 'excited';
+        }
+        if (
+          result.name == 'neutral' ||
+          result.name == 'desire' ||
+          result.name == 'curiosity' ||
+          result.name == 'realization' ||
+          result.name == 'caring' ||
+          result.name == 'disapproval' ||
+          result.name == 'approval'
+        ) {
+          type = 'neutral';
+        }
+        return { ...result, type };
+      });
+
+      let emotions = updatedEmotions.sort((a, b) => b.times - a.times);
       this.loadedEmotions = emotions.map((emotion) => {
         ///
         let transformed_size = 25 + emotion.times / 1.5 + '%';
