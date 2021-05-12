@@ -1,19 +1,42 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
+import { InsightService } from '../insights/insights.service';
+import { EmotionsService } from '../emotions.service';
 import { CalendarMode, Step } from 'ionic2-calendar/calendar';
 import { CalendarComponent } from 'ionic2-calendar';
+import { ModalController } from '@ionic/angular';
+import { Subscription, BehaviorSubject } from 'rxjs';
+import { Insight } from '../insights/insight.model';
+import * as moment from 'moment';
+import 'moment/locale/pt-br';
 
 @Component({
   selector: 'app-timeline',
   templateUrl: './timeline.page.html',
   styleUrls: ['./timeline.page.scss'],
 })
+
 export class TimelinePage implements OnInit {
   @ViewChild(CalendarComponent) myCalendar: CalendarComponent;
   eventSource = [];
   viewTitle: string;
   isToday: boolean;
   selectedDate: Date;
+  block = false;
+
+  emotionsSub: Subscription;
+  reflectionsSub: Subscription;
+
+  private getReflection: Insight[];
+  public matchedReflection: string[] = [];
+
+  constructor(
+    public authService: AuthService,
+    public modalCtrl: ModalController,
+    private insightService: InsightService,
+    private emotionsService: EmotionsService
+
+  ) {}
 
   calendar = {
     mode: 'month' as CalendarMode,
@@ -47,8 +70,6 @@ export class TimelinePage implements OnInit {
     },
   };
 
-  constructor(public authService: AuthService) {}
-
   // TODO:Load event log from database
   loadEvents() {
     this.eventSource = this.createRandomEvents();
@@ -68,6 +89,28 @@ export class TimelinePage implements OnInit {
         event.title
     );
   }
+
+  passedDate(selectedDate){
+    const date = new Date();
+    const newDate = moment(selectedDate).format('YYYY-MM-DD');
+
+    if (this.matchedReflection.length != 0)
+    {
+      this.matchedReflection = [];
+    }
+
+    if(selectedDate < date){
+      this.block = true;
+    }
+    else { this.block = false;}
+
+    for (var i = 0; i < this.getReflection.length; i++) {
+      if (this.getReflection[i].posted_date == newDate) {
+        this.matchedReflection.push(this.getReflection[i].reflection);
+      }
+    }
+  }
+
 
   today() {
     this.calendar.currentDate = new Date();
@@ -152,9 +195,28 @@ export class TimelinePage implements OnInit {
     return events;
   }
 
+  ngOnInit() {
+    this.reflectionsSub = this.insightService.reflections.subscribe((insights) => {
+      console.log(insights);
+      this.getReflection = insights;
+      console.log(this.getReflection);
+    })
+  }
+
+  ionViewWillEnter() {
+    //This will update _emotions, which will then trigger the above subscription
+    this.insightService.updateReflectionsFromServer();
+  }
+
   removeEvents() {
     this.eventSource = [];
   }
 
-  ngOnInit() {}
+  ngOnDestroy() {
+    // Unsubscribe the unused subscription to prevent memory lost
+    if (this.reflectionsSub) {
+      this.reflectionsSub.unsubscribe;
+    }
+
+  }
 }

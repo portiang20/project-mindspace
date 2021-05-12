@@ -6,24 +6,13 @@ import { EmotionsComponent } from '../emotions.component';
 import { Injectable, Input } from '@angular/core';
 import { Insight } from './insight.model';
 
-// interface InsigthData {
-//   tag: string;
-//   reflection: string;
-// }
-
-
 @Injectable({
   providedIn: 'root',
 })
 
 export class InsightService {
-  // Use BehaviorSubject for making _insights observable
-  // private _insights = new BehaviorSubject<Insight[]>([
-  // ]);
 
-  // get insights() {
-  //   return this._insights.asObservable();
-  // }
+  private ref_record = new BehaviorSubject<Insight[]>([]);
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 
@@ -43,6 +32,21 @@ export class InsightService {
       }, error => {
         console.log(error);
       });
+  }
+
+  updateReflectionsFromServer(){
+    this.http
+      .get(this.authService.djangoUrl + 'api/record/insights')
+      .pipe(take(1))
+      .subscribe((records: Insight[]) => {
+        console.log(records);
+        this.ref_record.next(records);
+      })
+  }
+
+  get reflections() {
+    // Return this._emotions observable for subsciption
+    return this.ref_record.asObservable();
   }
 
 }
