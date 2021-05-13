@@ -53,7 +53,6 @@ export class HomePage implements OnInit, OnDestroy {
         return emotions;
       }, {});
 
-      console.log(emotionsCount);
       //Then, convert {'emotion1':[freq1], 'emotion2':[freq2], ...} to:
       //  [{id:1, name:'emotion1', times: [freq1]},
       //   {id:2, name:'emotion2', times: [freq2]}]
@@ -64,8 +63,6 @@ export class HomePage implements OnInit, OnDestroy {
           times: emotionsCount[emotion],
         };
       });
-
-      console.log(results);
 
       let updatedEmotions: Emotion[] = results.map((result) => {
         let type = '';
@@ -131,8 +128,6 @@ export class HomePage implements OnInit, OnDestroy {
         return { ...emotion, size: transformed_size };
       });
       this.topFiveEmotions = this.loadedEmotions.slice(0, 5);
-      console.log(emotions);
-      console.log(this.topFiveEmotions);
     });
   }
 
