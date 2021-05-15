@@ -34,12 +34,13 @@ services:
       - U1_UID=m78via5KcyPUSe1XJb0Tu3XwcZD3
       - U2_UID=h28UH8bcXOVR811IR786r5AlfrJ2
       - GOOGLE_APPLICATION_CREDENTIALS=/app/mindspace-adelaide-firebase-adminsdk-yqysv-eb4cc6f124.json
+      - FIREBASE_CLIENT_API_KEY=AIzaSyCJcKmC52J2wggjOtQS33Mr6g2T4czMU8Y
     depends_on:
       - db
 
   db:
     platform: linux/x86_64 #For Apple M1 processor
-    image: mysql:8
+    image: mysql:8.0
     ports:
       - '3306:3306'
     environment:

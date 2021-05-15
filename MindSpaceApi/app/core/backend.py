@@ -1,11 +1,9 @@
 from django.contrib.auth.backends import BaseBackend
 from django.contrib.auth import get_user_model
 
-import firebase_admin
 from firebase_admin import auth
 
 User = get_user_model()
-firebase_admin.initialize_app()
     
 class MindSpaceCustomBackend(BaseBackend):
     """Custom user authentication supports token verification from google"""
