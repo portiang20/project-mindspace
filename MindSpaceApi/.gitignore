@@ -1,1 +1,2 @@
 /data/db/mysql/ib_log*
+__pycache__/*
