@@ -7,6 +7,7 @@ import { CalendarComponent } from 'ionic2-calendar';
 import { ModalController } from '@ionic/angular';
 import { Subscription, BehaviorSubject } from 'rxjs';
 import { Insight } from '../insights/insight.model';
+import { Emotion } from '../emotion.model';
 import * as moment from 'moment';
 import 'moment/locale/pt-br';
 
@@ -21,15 +22,16 @@ export class TimelinePage implements OnInit {
   eventSource = [];
   viewTitle: string;
   isToday: boolean;
-  selectedDate: Date;
+  selectedDate: Date = new Date();
   block = false;
 
   emotionsSub: Subscription;
   reflectionsSub: Subscription;
 
-  private getReflection: Insight[];
+  public getReflection: Insight[] = [];
   public matchedReflection: string[] = [];
   private ref_record = new BehaviorSubject<Insight[]>([]);
+  public updatedEmotions: Emotion[] = [];
 
   constructor(
     public authService: AuthService,
@@ -96,20 +98,12 @@ export class TimelinePage implements OnInit {
     return this.ref_record.asObservable();
   }
 
-  passedDate(selectedDate){
-    const date = new Date();
-    const newDate = moment(selectedDate).format('YYYY-MM-DD');
+  updateMatchedReflection() {
+    const newDate = moment(this.selectedDate).format('YYYY-MM-DD');
 
-    if (this.matchedReflection.length != 0)
-    {
+    if (this.matchedReflection.length != 0) {
       this.matchedReflection = [];
     }
-
-    if(selectedDate < date){
-      this.block = true;
-    }
-    else { this.block = false;}
-
     for (var i = 0; i < this.getReflection.length; i++) {
       if (this.getReflection[i].posted_date == newDate) {
         this.matchedReflection.push(this.getReflection[i].reflection);
@@ -117,6 +111,17 @@ export class TimelinePage implements OnInit {
     }
   }
 
+  passedDate(selectedDate){
+    const date = new Date();
+    this.selectedDate = selectedDate
+
+    if(selectedDate < date){
+      this.block = true;
+    }
+    else { this.block = false;}
+
+    this.updateMatchedReflection()
+  }
 
   today() {
     this.calendar.currentDate = new Date();
@@ -202,19 +207,106 @@ export class TimelinePage implements OnInit {
   }
 
   ngOnInit() {
-    this.reflectionsSub = this.ref_record.subscribe((insights) => {
-      console.log(insights);
-      this.getReflection = insights;
-      console.log(this.getReflection);
-    })
+
+    this.emotionsSub = this.emotionsService.emotions.subscribe((records) => {
+      //First, convert from server format to:
+      //  {'emotion1':[freq1], 'emotion2':[freq2], ...}
+      let emotionsCount = records.reduce((emotions, record) => {
+        emotions[record.emotion]
+          ? emotions[record.emotion]++
+          : (emotions[record.emotion] = 1);
+        return emotions;
+      }, {});
+
+      console.log(emotionsCount);
+      //Then, convert {'emotion1':[freq1], 'emotion2':[freq2], ...} to:
+      //  [{id:1, name:'emotion1', times: [freq1]},
+      //   {id:2, name:'emotion2', times: [freq2]}]
+      let results = Object.keys(emotionsCount).map((emotion, index) => {
+        return {
+          id: index.toString(),
+          name: emotion,
+          times: emotionsCount[emotion],
+        };
+      });
+
+      console.log(results);
+
+      this.updatedEmotions = results.map((result) => {
+        let type = '';
+        if (
+          result.name == 'joy' ||
+          result.name == 'happy' ||
+          result.name == 'gratitude' ||
+          result.name == 'admiration' ||
+          result.name == 'optimism' ||
+          result.name == 'relief' ||
+          result.name == 'love'
+        ) {
+          type = 'happy';
+        }
+        if (
+          result.name == 'sadness' ||
+          result.name == 'grief' ||
+          result.name == 'remorse' ||
+          result.name == 'disappointment'
+        ) {
+          type = 'sad';
+        }
+        if (result.name == 'anger' || result.name == 'annoyance') {
+          type = 'anger';
+        }
+        if (result.name == 'fear' || result.name == 'nervousness') {
+          type = 'fear';
+        }
+        if (
+          result.name == 'disgust' ||
+          result.name == 'embarrass' ||
+          result.name == 'confusion'
+        ) {
+          type = 'disgust';
+        }
+        if (
+          result.name == 'surprise' ||
+          result.name == 'excitement' ||
+          result.name == 'amusement' ||
+          result.name == 'pride'
+        ) {
+          type = 'excited';
+        }
+        if (
+          result.name == 'neutral' ||
+          result.name == 'desire' ||
+          result.name == 'curiosity' ||
+          result.name == 'realization' ||
+          result.name == 'caring' ||
+          result.name == 'disapproval' ||
+          result.name == 'approval'
+        ) {
+          type = 'neutral';
+        }
+        return { ...result, type };
+      });
+    });
+
+
   }
 
   ionViewWillEnter() {
-    //This will update _emotions, which will then trigger the above subscription
+    //This will ref_record, which will then trigger the above subscription
     this.insightService.updateReflectionsFromServer().subscribe((records: Insight[]) => {
       console.log(records);
       this.ref_record.next(records);
     });
+
+    this.reflectionsSub = this.ref_record.subscribe((insights) => {
+      console.log(insights);
+      this.getReflection = insights;
+      console.log(this.getReflection);
+      this.updateMatchedReflection();
+    })
+
+    this.emotionsService.updateEmotionsFromServer();
   }
 
   removeEvents() {
@@ -225,6 +317,10 @@ export class TimelinePage implements OnInit {
     // Unsubscribe the unused subscription to prevent memory lost
     if (this.reflectionsSub) {
       this.reflectionsSub.unsubscribe;
+    }
+
+    if (this.emotionsSub) {
+      this.emotionsSub.unsubscribe;
     }
 
   }

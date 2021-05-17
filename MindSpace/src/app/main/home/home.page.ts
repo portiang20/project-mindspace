@@ -132,7 +132,7 @@ export class HomePage implements OnInit, OnDestroy {
   }
 
   ionViewWillEnter() {
-    //This will update _emotions, which will then trigger the above subscription
+    //This will update emotions, which will then trigger the above subscription
     this.emotionsService.updateEmotionsFromServer();
   }
 

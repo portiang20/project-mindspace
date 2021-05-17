@@ -31,4 +31,18 @@
   <ion-text *ngIf="matchedReflection">
     <div *ngFor="let m of matchedReflection">{{m}}</div>
   </ion-text>
+  <div>
+    <h4 style="margin-top: 2em;">Identified emotions</h4>
+    <!-- emotion list start-->
+    <ion-list>
+      <ion-item class="link" *ngFor="let u of updatedEmotions">
+        <div class="dot" slot="start">
+          <div [id]="u.type"></div>
+        </div>
+        <!-- url link -> explore/emotion.name-->
+        <ion-text [routerLink]="['../explore', u.name]">{{u.name}}</ion-text>
+        <ion-text slot="end">{{u.times}} times</ion-text>
+      </ion-item>
+    </ion-list>
+  </div>
 </ion-content>

@@ -123,6 +123,11 @@ export class InsightsPage implements OnInit, OnDestroy {
     console.log(this.hashtag);
   }
 
+  ionViewWillEnter() {
+    //This will update emotions, which will then trigger the above subscription
+    this.emotionsService.updateEmotionsFromServer();
+  }
+
   onClickHashtag(tag: Emotion) {
     this.hashtag = tag;
   }
