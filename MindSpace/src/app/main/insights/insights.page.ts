@@ -132,7 +132,11 @@ export class InsightsPage implements OnInit, OnDestroy {
     this.awareness = content;
 
     // TODO: post #hashtag + awareness to backend
-    this.insightService.updateReflection(this.awareness, this.hashtag.name);
+    this.insightService.updateReflection(this.awareness, this.hashtag.name).subscribe(data => {
+      console.log(data['_body']);
+    }, error => {
+      console.log(error);
+    });;
 
     // dismiss this modal and deliver data to explore
     await this.modalCtrl.dismiss({

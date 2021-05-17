@@ -29,6 +29,7 @@ export class TimelinePage implements OnInit {
 
   private getReflection: Insight[];
   public matchedReflection: string[] = [];
+  private ref_record = new BehaviorSubject<Insight[]>([]);
 
   constructor(
     public authService: AuthService,
@@ -88,6 +89,11 @@ export class TimelinePage implements OnInit {
         ',' +
         event.title
     );
+  }
+
+  get reflections() {
+    // Return this._emotions observable for subsciption
+    return this.ref_record.asObservable();
   }
 
   passedDate(selectedDate){
@@ -196,7 +202,7 @@ export class TimelinePage implements OnInit {
   }
 
   ngOnInit() {
-    this.reflectionsSub = this.insightService.reflections.subscribe((insights) => {
+    this.reflectionsSub = this.ref_record.subscribe((insights) => {
       console.log(insights);
       this.getReflection = insights;
       console.log(this.getReflection);
@@ -205,7 +211,10 @@ export class TimelinePage implements OnInit {
 
   ionViewWillEnter() {
     //This will update _emotions, which will then trigger the above subscription
-    this.insightService.updateReflectionsFromServer();
+    this.insightService.updateReflectionsFromServer().subscribe((records: Insight[]) => {
+      console.log(records);
+      this.ref_record.next(records);
+    });
   }
 
   removeEvents() {
