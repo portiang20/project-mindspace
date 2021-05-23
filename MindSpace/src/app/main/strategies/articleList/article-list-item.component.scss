@@ -1,5 +1,5 @@
 ion-card {
-  height: 160px;
+  //height: 160px;
 
   img {
     width: 75px;
@@ -20,23 +20,13 @@ ion-card {
 
   .cardImage {
     width: 75px;
-    height: 160px;
+    //height: 160px;
     margin: 0;
   }
 
   .tag {
-    text-align: left;
+    text-align: right;
     margin-bottom: 0px;
     margin-left: -15px;
-
-  }
-
-  .readMore {
-    float: right;
-    text-align: right;
-  }
-  .readMore a {
-    color: var(--color);
-    text-decoration: none;
   }
 }

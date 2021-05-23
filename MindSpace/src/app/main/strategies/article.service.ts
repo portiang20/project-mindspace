@@ -14,20 +14,20 @@ export class ArticleService {
   private articles: Article[] = [
     {
       id: '001',
-      title: 'Excitement title',
-      shortContent: 'Excitement Demo Excitement Demo Excitement Demo Excitement Demo Excitement Demo',
+      title: 'Beyond Blue',
+      shortContent: 'Anxiety, depression and suicide prevention',
       content:
-        'Excitement content article Excitement content Excitement content Excitement content Excitement content Excitement content Excitement content Excitement content Excitement content Excitement content Excitement content Excitement content Excitement content Excitement content.',
+        'https://www.beyondblue.org.au/',
       tag: 'Excitement',
-      type: 'happy',
+      type: 'fear',
       imgPath: '../../assets/strategiesImage/Excitement1.jpeg',
     },
     {
       id: '002',
-      title: 'Peace title',
-      shortContent: 'Peace Demo Peace Demo Peace Demo Peace Demo Peace Demo Peace Demo Peace Demo',
+      title: "Kids' helpline",
+      shortContent: 'Phone counselling service',
       content:
-        'Peace content article Peace content Peace content Peace content Peace content Peace content Peace content Peace content Peace content Peace content Peace content Peace content Peace content Peace content.',
+        'https://kidshelpline.com.au/',
       tag: 'Peace',
       type: 'happy',
       imgPath: '../../assets/strategiesImage/Peace1.jpeg',
@@ -35,10 +35,10 @@ export class ArticleService {
     },
     {
       id: '003',
-      title: 'Panic title',
-      shortContent:  'Panic Demo Panic Demo Panic Demo Panic Demo Panic Demo Panic Demo Panic Demo ',
+      title: 'R u okay?',
+      shortContent:  'Conversation could change life',
       content:
-        'Panic content article Panic content Panic content Panic content Panic content Panic content Panic content Panic content Panic content Panic content Panic content Panic content Panic content Panic content Panic content Panic content Panic content Panic content Panic content Panic content Panic content.',
+        'https://www.ruok.org.au/',
       tag: 'Panic',
       type: 'fear',
       imgPath: '../../assets/strategiesImage/Panic1.jpeg',
@@ -46,14 +46,34 @@ export class ArticleService {
     },
     {
       id: '004',
-      title: 'Dislike title',
+      title: 'Managing anger',
       shortContent:
-        'Dislike Demo Dislike Demo Dislike Demo Dislike Demo Dislike Demo Dislike Demo Dislike Demo ',
+        "MensLine's Australia",
       content:
-        'Dislike Content article Dislike Content Dislike Content Dislike Content Dislike Content Dislike Content Dislike Content Dislike Content Dislike Content Dislike Content Dislike Content Dislike Content Dislike Content Dislike Content Dislike Content Dislike Content Dislike Content Dislike Content.',
-      tag: 'Dislike',
-      type: 'disgust',
-      imgPath: '../../assets/strategiesImage/Dislike1.jpeg',
+        'https://mensline.org.au/how-to-deal-with-anger/managing-anger/',
+      tag: 'Anger',
+      type: 'anger',
+      imgPath: '../../assets/strategiesImage/Dislike1.jpeg'
+    },
+    {
+      id: '005',
+      title: 'Black dog institute',
+      shortContent: 'Science. Compassion. Action',
+      content:
+        'https://www.blackdoginstitute.org.au/ ',
+      tag: 'Excitement',
+      type: 'fear',
+      imgPath: '../../assets/strategiesImage/Excitement1.jpeg',
+    },
+
+    {
+      id: '002',
+      title: "Australian centre ",
+      shortContent: 'grief and bereavement',
+      content:'https://www.grief.org.au/ ',
+      tag: 'Joy',
+      type: 'happy',
+      imgPath: '../../assets/strategiesImage/Peace1.jpeg',
 
     },
   ];
