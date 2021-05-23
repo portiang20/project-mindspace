@@ -1,12 +1,16 @@
+import { EmotionListService } from './../emotion-list.service';
 import { Emotion } from './../emotion.model';
 import { Record } from '../record.model';
 import { InsightsPage } from './../insights/insights.page';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Pipe } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { IonRouterOutlet, ModalController } from '@ionic/angular';
 
 import * as moment from 'moment';
+import * as Highcharts from 'highcharts';
+
 import { EmotionsService } from '../emotions.service';
+import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 
 @Component({
   selector: 'app-explore',
@@ -17,6 +21,13 @@ export class ExplorePage implements OnInit {
   title: string = 'Explore';
   insights = null;
   emoTitle: string;
+  emoTimes: number;
+  totalEmoTimes: number;
+  emoPercentage: number;
+  prevEmoTitle: string;
+  nextEmoTitle: string;
+  emoType: string;
+  color: string;
 
   //Selected date range
   selectedFrom: moment.Moment;
@@ -29,13 +40,23 @@ export class ExplorePage implements OnInit {
   emotionTimesInTime = {}; // {'date1':freq, 'date2':freq, ...} where date is in the format of YYYY-MM-DD
   triggerKeywordsInTime = {}; // {'emotion1':freq, 'emotion2':freq, ...}
 
+  // times to construct chart
+  timesArray = [];
+
+  // Coloumn charts
+  Highcharts: typeof Highcharts = Highcharts;
+  chartOptions: Highcharts.Options
+
   constructor(
     private route: Router,
     public modalCtrl: ModalController,
     private routerOutlet: IonRouterOutlet,
     private activeRoute: ActivatedRoute,
-    private emotionsService: EmotionsService
-  ) {}
+    private emotionsService: EmotionsService,
+    private emotionListService: EmotionListService,
+  ) {
+
+  }
 
   // Set emoTitle to be the most significant emotion if it is undefined
   setEmoTitleIfNotSet() {
@@ -111,15 +132,136 @@ export class ExplorePage implements OnInit {
       return emotions;
     }, initialEmotionTimes);
     console.log(this.emotionTimesInTime);
+    this.timesArray = Object.values(this.emotionTimesInTime);
+  }
+
+  columnChart() {
+    console.log(this.timesArray);
+    this.chartOptions = {
+      chart: {
+        marginLeft: 20,
+        marginRight: 230,
+        marginBottom: 200,
+        spacingTop: 0,
+        spacingLeft: 1,
+      },
+      title: {
+        text: null,
+      },
+      series: [
+        {
+          type: 'column',
+          //data: [1, 2, 3, 4, 5, 3, 2],
+          data: this.timesArray,
+          showInLegend: false,
+          color: this.color,
+          borderRadius: 10,
+        }
+      ],
+      xAxis: {
+        categories: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+      },
+      yAxis: {
+        min: 0,
+        visible: false
+      },
+      plotOptions: {
+        column: {
+          //pointPadding: 0.1,
+          borderWidth: 0,
+          //groupPadding: 0.2,
+          ///pointWitdh: 1,
+        }
+      },
+      credits: {
+        enabled: false
+      }
+    };
+  };
+
+  clickPrev() {
+    this.selectedTo = moment(this.selectedFrom).subtract(1, 'd');
+    this.selectedFrom = moment(this.selectedFrom).subtract(7, 'd');
+    this.updateSelected();
+    this.columnChart();
+  }
+
+  clickNext() {
+    if (this.selectedFrom <= moment() && this.selectedTo >= moment()) { window.alert("There is no more record") }
+    else {
+      this.selectedFrom = moment(this.selectedTo).add(1, 'd');
+      this.selectedTo = moment(this.selectedTo).add(7, 'd');
+      this.updateSelected();
+      this.columnChart();
+    }
+  }
+
+  setColor() {
+    this.emoType = this.emotionListService.getType(this.emoTitle);
+    console.log(this.emoType);
+    switch (this.emoType) {
+      case "happy": {
+        this.color = "#FBE5C8";
+        break;
+      }
+      case "excited": {
+        this.color = "#BF4C41";
+        break;
+      }
+      case "sad": {
+        this.color = "#8FDDE7";
+        break;
+      }
+      case "anger": {
+        this.color = "#EF7C8E";
+        break;
+      }
+      case "fear": {
+        this.color = "#877785";
+        break;
+      }
+      case "disgust": {
+        this.color = "#B6E2D3";
+        break;
+      }
+      case "neutral": {
+        this.color = "#DACAC4";
+        break;
+      }
+      default: {
+        this.color = "#607D86";
+        break;
+      }
+    }
   }
 
   ngOnInit() {
-    this.selectedTo = moment();
-    this.selectedFrom = moment().subtract(6, 'd');
+
+    var today = moment().isoWeekday();
+    // if today is sunday
+    if (today == 7) {
+      this.selectedTo = moment();
+      this.selectedFrom = moment().subtract(6, 'd');
+    }
+    else if (today == 1) {
+      this.selectedFrom = moment();
+      this.selectedTo = moment().add(6, 'd');
+    } else {
+      var toToday;
+      // eg. today is Tue, Tue = 2
+      // selectedFrom should subtract 2
+      // selectedTo should add (7-2)
+      toToday = 7 - today;
+      this.selectedTo = moment().add(toToday, 'd');
+      this.selectedFrom = moment().subtract(today, 'd');
+    }
+
+    //this.selectedTo = moment();
+    //this.selectedFrom = moment().subtract(6, 'd');
 
     //For testing, remove it after updating selected date range functionalities is done
-    this.selectedTo = moment('2021-03-31', 'YYYY-MM-DD');
-    this.selectedFrom = moment('2021-03-25', 'YYYY-MM-DD');
+    //this.selectedTo = moment('2021-03-28', 'YYYY-MM-DD');
+    //this.selectedFrom = moment('2021-03-22', 'YYYY-MM-DD');
     /////////////////////////////////////////////////////////////
 
     this.activeRoute.params.subscribe((param) => {
@@ -131,7 +273,24 @@ export class ExplorePage implements OnInit {
       this.allRecords = records;
       this.setEmoTitleIfNotSet();
       this.updateSelected();
+      this.setColor();
+      this.columnChart();
+      //this.clickPrev();
+      this.totalEmoTimes = this.emotionListService.totalCounts();
+      this.emoTimes = this.emotionListService.countsOfEmo(this.emoTitle);
+      if (this.emoTimes > 0) {
+        this.emoPercentage = Math.round(this.emoTimes / this.totalEmoTimes * 100);
+      }
+      else {
+        this.emoPercentage = 0;
+      }
+      console.log(this.emotionListService.getRecords());
+      console.log(this.emotionListService.getType(this.emoTitle));
+      this.prevEmoTitle = this.emotionListService.prevEmo(this.emoTitle);
+      this.nextEmoTitle = this.emotionListService.nextEmo(this.emoTitle);
     });
+
+
   }
 
   ionViewWillEnter() {
@@ -153,5 +312,6 @@ export class ExplorePage implements OnInit {
     modal.onDidDismiss().then((res) => {
       this.insights = res.data;
     });
-  }
+  };
+
 }

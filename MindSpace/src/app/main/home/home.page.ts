@@ -1,3 +1,4 @@
+import { EmotionListService } from './../emotion-list.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Emotion } from '../emotion.model';
 import { EmotionsService } from '../emotions.service';
@@ -33,7 +34,8 @@ export class HomePage implements OnInit, OnDestroy {
 
   constructor(
     private emotionsService: EmotionsService,
-    public authService: AuthService
+    private emotionListService : EmotionListService,
+    public authService: AuthService,
   ) {
     if (authService.isLoggedIn) {
       this.name = authService.userData.displayName || 'Dear';
@@ -127,6 +129,8 @@ export class HomePage implements OnInit, OnDestroy {
         ///
         return { ...emotion, size: transformed_size };
       });
+      //console.log(this.loadedEmotions);
+      this.emotionListService.addRecords(this.loadedEmotions)
       this.topFiveEmotions = this.loadedEmotions.slice(0, 5);
     });
   }
@@ -134,7 +138,9 @@ export class HomePage implements OnInit, OnDestroy {
   ionViewWillEnter() {
     //This will update emotions, which will then trigger the above subscription
     this.emotionsService.updateEmotionsFromServer();
+    this.emotionListService.clearRecords();
   }
+
 
   ngOnDestroy() {
     // Unsubscribe the unused subscription to prevent memory lost

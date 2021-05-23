@@ -1,3 +1,27 @@
 .capitalize {
   text-transform: capitalize;
 }
+#dateText{
+  text-align: center;
+}
+#circle{
+  margin: auto;
+  text-align: center;
+}
+
+#prev{
+  position: absolute;
+  left: 5px;
+  width: 75px;
+  padding: 10px;
+  text-align: center;
+}
+
+#next{
+  position: absolute;
+  right: 5px;
+  width: 75px;
+  padding: 10px;
+  text-align: center;
+}
+
