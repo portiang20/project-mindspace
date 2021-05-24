@@ -9,10 +9,11 @@
     <h1 class="capitalize">Explore {{emoTitle}} emotion</h1>
   </ion-text>
   <button id="prev" [routerLink]="['/main/tabs/explore', prevEmoTitle]">
-    previous
+ {{prevEmoTitle}}
   </button>
   <button id="next" [routerLink]="['/main/tabs/explore', nextEmoTitle]">
-    next
+    {{nextEmoTitle}}
+
   </button>
   <div id="circle">
     <circle-progress
@@ -54,13 +55,6 @@
       <ion-text slot="end">{{item.value}} times</ion-text>
     </ion-item>
   </ion-list>
-
-  <!-- method 1 floating button to show insights modal-->
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button (click)="showInsightsModal()">
-      <ion-icon name="create-outline"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
 
   <!-- method 2 use fixed button to show insights modal -->
   <ion-button

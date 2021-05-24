@@ -64,7 +64,7 @@ export class EmotionListService {
     for (let i = 0; i < this.emotionList.length; i++) {
       var _name: string = this.emotionList[i].name;
       if (emoName == _name) {
-        if (i == 28) {
+        if (i == 27) {
           return this.emotionList[0].name;
         }
         else {

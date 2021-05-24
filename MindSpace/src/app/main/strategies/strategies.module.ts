@@ -10,13 +10,16 @@ import { StrategiesPageRoutingModule } from './strategies-routing.module';
 
 import { StrategiesPage } from './strategies.page';
 
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    StrategiesPageRoutingModule
+    StrategiesPageRoutingModule,
   ],
+  providers: [InAppBrowser],
   declarations: [StrategiesPage, ArticleListItemComponent]
 })
 export class StrategiesPageModule {}
