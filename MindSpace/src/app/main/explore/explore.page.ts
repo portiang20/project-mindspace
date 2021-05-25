@@ -151,6 +151,7 @@ export class ExplorePage implements OnInit {
       series: [
         {
           type: 'column',
+          name: this.emoTitle,
           //data: [1, 2, 3, 4, 5, 3, 2],
           data: this.timesArray,
           showInLegend: false,
@@ -239,21 +240,42 @@ export class ExplorePage implements OnInit {
 
     var today = moment().isoWeekday();
     // if today is sunday
-    if (today == 7) {
-      this.selectedTo = moment();
-      this.selectedFrom = moment().subtract(6, 'd');
-    }
-    else if (today == 1) {
-      this.selectedFrom = moment();
-      this.selectedTo = moment().add(6, 'd');
-    } else {
-      var toToday;
-      // eg. today is Tue, Tue = 2
-      // selectedFrom should subtract 2
-      // selectedTo should add (7-2)
-      toToday = 7 - today;
-      this.selectedTo = moment().add(toToday, 'd');
-      this.selectedFrom = moment().subtract(today, 'd');
+    switch(today){
+      case 1:{
+        this.selectedFrom = moment();
+        this.selectedTo = moment().add(6, 'd');
+        break;
+      }
+      case 2:{
+        this.selectedFrom = moment().subtract(1, 'd');
+        this.selectedTo = moment().add(5, 'd');
+        break;
+      }
+      case 3:{
+        this.selectedFrom = moment().subtract(2, 'd');
+        this.selectedTo = moment().add(4, 'd');
+        break;
+      }
+      case 4:{
+        this.selectedFrom = moment().subtract(3, 'd');
+        this.selectedTo = moment().add(3, 'd');
+        break;
+      }
+      case 5:{
+        this.selectedFrom = moment().subtract(4, 'd');
+        this.selectedTo = moment().add(2, 'd');
+        break;
+      }
+      case 6:{
+        this.selectedFrom = moment().subtract(5, 'd');
+        this.selectedTo = moment().add(1, 'd');
+        break;
+      }
+      case 7:{
+        this.selectedFrom = moment().subtract(6, 'd');
+        this.selectedTo = moment();
+        break;
+      }
     }
 
     //this.selectedTo = moment();

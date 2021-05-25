@@ -17,6 +17,10 @@ export class ArticleListItemComponent implements OnInit {
 
 
   ngOnInit() { }
+
+  openPage(url:string){
+    this.inAppBrowser.create(url,'_blank');
+  }
   /*
   // show webview modal
   async showWebviewModal() {
