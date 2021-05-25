@@ -71,4 +71,4 @@ P.S. It is always good to first run "git pull" first before working on your chan
 1.  In the current demo, the email and password of the two testing accounts (U1 and U2) are:
 
     Email: test@test.com, Password: 123456\
-    Email: test2@test.com, Password: 123456\
+    Email: test2@test.com, Password: 123456
