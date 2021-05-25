@@ -22,21 +22,19 @@
     </ion-buttons>
   </ion-item>
 
+  <!-- Display Calendar to choose date -->
   <div style="height: 260px">
     <calendar [eventSource]="eventSource" [calendarMode]="calendar.mode" [currentDate]="calendar.currentDate"
-      [showEventDetail]="false" (onCurrentDateChanged)="passedDate($event)" (onEventSelected)="onEventSelected($event)"
-      (onTitleChanged)="onViewTitleChanged($event)" [step]="calendar.step">
+      [showEventDetail]="false" (onCurrentDateChanged)="passedDate($event)">
     </calendar>
   </div>
 
-  <ion-text *ngIf="matchedReflection">
-    <h3>Reflection of the Day</h3>
-    <h5 *ngFor="let m of matchedReflection">{{m}}</h5>
-  </ion-text>
-
-  <div>
-    <!-- <h3 style="margin-top: 2em">Identified emotions</h3> -->
-    <h3>Identified emotions</h3>
+  <!-- Display Historical Emotion of the day if Emotion is available-->
+  <ion-text *ngIf="matchedEmotions.length">
+    <!-- <ion-item style="margin-top: 1em"> -->
+    <ion-item>
+      <h3>Identified Emotions of the Day</h3>
+    </ion-item>
     <!-- emotion list start-->
     <ion-list>
       <ion-item class="link" *ngFor="let u of matchedEmotions">
@@ -48,5 +46,17 @@
         <ion-text slot="end">{{u.times}} times</ion-text>
       </ion-item>
     </ion-list>
-  </div>
+  </ion-text>
 </ion-content>
+
+<!-- Display Reflection of the day if reflection is available -->
+<ion-text *ngIf="matchedReflection.length">
+  <ion-item>
+    <h3>Reflection of the Day</h3>
+    <ion-icon name="chevron-down-outline" item-right *ngIf="isShow" (click)="isShow=!isShow" slot="end"></ion-icon>
+    <ion-icon name="chevron-forward-outline" item-right *ngIf="!isShow" (click)="isShow=!isShow" slot="end"></ion-icon>
+  </ion-item>
+  <ion-list *ngIf="isShow">
+    <h5 *ngFor="let m of matchedReflection">{{m}}</h5>
+  </ion-list>
+</ion-text>
