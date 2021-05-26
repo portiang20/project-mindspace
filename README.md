@@ -37,7 +37,7 @@ P.S. It is always good to first run "git pull" first before working on your chan
 
 ## Import sample data
 
-1.  Data of emotion records has to be saved as mindspace_dataset.csv in the directory /MindSpaceApi/app/. Each row of the csv file is in the format of[UserName, Emotion, PostedDate, Post]. Note that the UserName field has to be either "U1" or "U2" in the current demo. This will allow mapping each entry to the user with "U1_UID" or "U2_UID" specified as environment variables in the file /MindSpaceApi/docker-compose.yml. Also, the PostedDate field has to be in the format of "YYYY-MM-DD" for the following import_command to work.
+1.  Data of emotion records has to be saved as mindspace_dataset.csv in the directory /MindSpaceApi/app/. Each row of the csv file is in the format of[UserName, Emotion, PostedDate, Post]. Note that the UserName field has to be either "U1" or "U2" in the current demo. This will allow mapping each entry to the user with "U1_UID" or "U2_UID" specified as environment variables in the file /MindSpaceApi/docker-compose.yml. Also, the PostedDate field has to be in the format of "YYYY-MM-DD" for the following import_data command to work.
 
 2.  Definition of trigger keywords has to be saved as trigger_keywords.csv in the directory /MindSpaceApi/app/. Each row of the csv file is in the format of [Emotion, Trigger keywords]. Trigger keywords field has to be a comma separated list of trigger keywords that maps to the corresponding emotion.
 
