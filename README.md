@@ -31,9 +31,19 @@ P.S. It is always good to first run "git pull" first before working on your chan
     Uid: a1\
     Password: 123456
 
-2.  If you want to start the Django server with an empty database, after the backend server is running, you can run the following command to create a new superadmin user:
+2.  If you want to start the Django server with an empty database, after the backend server is built and running, you can run the following command to create a new superadmin user:
 
     docker-compose run --rm app sh -c "python manage.py createsuperuser"
+
+## Import sample data
+
+1.  Data of emotion records has to be saved as mindspace_dataset.csv in the directory /MindSpaceApi/app/. Each row of the csv file is in the format of[UserName, Emotion, PostedDate, Post]. Note that the UserName field has to be either "U1" or "U2" in the current demo. This will allow mapping each entry to the user with "U1_UID" or "U2_UID" specified as environment variables in the file /MindSpaceApi/docker-compose.yml. Also, the PostedDate field has to be in the format of "YYYY-MM-DD" for the following import_data command to work.
+
+2.  Definition of trigger keywords has to be saved as trigger_keywords.csv in the directory /MindSpaceApi/app/. Each row of the csv file is in the format of [Emotion, Trigger keywords]. Trigger keywords field has to be a comma separated list of trigger keywords that maps to the corresponding emotion.
+
+3.  With the data of emotion records and trigger keywords on place. The processed data can be saved into database using the following command after the backend server is built and running:
+
+    docker-compose run --rm app sh -c "python manage.py import_data"
 
 ## Troubleshooting for running the backend server
 
@@ -55,3 +65,10 @@ P.S. It is always good to first run "git pull" first before working on your chan
 1.  Navigate to the folder /MindSpace, run:
 
     ionic serve
+
+## Testing user accounts
+
+1.  In the current demo, the email and password of the two testing accounts (U1 and U2) are:
+
+    Email: test@test.com, Password: 123456\
+    Email: test2@test.com, Password: 123456
