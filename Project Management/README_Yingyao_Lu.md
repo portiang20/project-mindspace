@@ -17,18 +17,25 @@ resources/Prototype
 Frontend development is located in repo MindSpace/src/app
 
 ### Landing and Alert
-Landing page(app/landing)__
+
+Landing page(app/landing)
+
 Alert for checking permission (app/alert)
 
-### Athentication
-Login and signup with email(app/auth)__
-User Dashboard and test user (app/dashboard)__
+### Athentication (app/auth)
+Login and signup with email
+
+User Dashboard and test user (app/dashboard)
+
 Google Firebase authetication (app/services)
 
-### Insights Page 
-update emotion and post reflection to database (app/main/insights)
+### Insights Page (app/main/insights)
 
-### TimeLine page 
+update emotion hashtag
+
+post reflection to database 
+
+### TimeLine page (app/main/insights)
 calendar view and display historical data(app/main/insights)
 
 ### Database
