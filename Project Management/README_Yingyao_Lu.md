@@ -4,25 +4,25 @@ Name: Yingyao LU
 ID: a1784870
 
 ## PJ roles
-Scrum Master (2nd Sprint Week 4-6)
-Scretary (Take turn)
-Frontend Developer
+Scrum Master (2nd Sprint Week 4-6)__
+Scretary (Take turn)__
+Frontend Developer__
 Tester
 
 ## Contributions
 
-###UI design with figma
-    resources/Prototype
+### UI design with figma
+resources/Prototype
 
 Frontend development is located in repo MindSpace/src/app
 
 ### Landing and Alert
-Landing page(app/landing)
+Landing page(app/landing)__
 Alert for checking permission (app/alert)
 
 ### Athentication
-Login and signup with email(app/auth)
-User Dashboard and test user (app/dashboard)
+Login and signup with email(app/auth)__
+User Dashboard and test user (app/dashboard)__
 Google Firebase authetication (app/services)
 
 ### Insights Page 
