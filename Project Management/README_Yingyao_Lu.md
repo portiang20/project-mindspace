@@ -1,12 +1,15 @@
 # Project Management Summary
 
-Name: Yingyao LU
+Name: Yingyao Lu
 ID: a1784870
 
 ## PJ roles
-Scrum Master (2nd Sprint Week 4-6)__
-Scretary (Take turn)__
-Frontend Developer__
+Scrum Master (2nd Sprint Week 4-6)
+
+Scretary (Take turn)
+
+Developer
+
 Tester
 
 ## Contributions
