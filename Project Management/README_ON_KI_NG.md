@@ -33,10 +33,6 @@ Display of a list of external resources with illustration
 
 Display of emotion name of five circles
 
-### Database
-
-setup testing user data
-
 ### UI elements of Home
 
 Using Photoshop to create circle elements (resources/*.png)
