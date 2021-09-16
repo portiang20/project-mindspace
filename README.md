@@ -1,19 +1,10 @@
-## Clone this project to your computer (After installing git)
+## Project Aims
 
-    git clone https://github.cs.adelaide.edu.au/MCI-Projects-2021/Team-024.git
+MindSpace is a cross-platform app that harnesses the power of NLP to analyze social media and keyboard data to display user emotions and intensity in interactive graphs and diagrams to help users identify their current emotions. The purpose of this application is to help users increase their emotional awareness and provide them with the resources to manage their emotional issues, solve the current problems of mental health in society by taking advantage of technological advances in the current era. 
 
-## Push to github
+Our team is responsible for the design and development of the mobile app using the sample data provided by our clients Dr. Thushari Atapattu and Menasha Thilakaratne. We developed functions for users to track emotional data on a weekly and monthly basis, make reflections for specific emotions, and seek strategies to handle emotional problems.
 
-1.  Commit the current work
-
-    git add .\
-    git commit -m “(message)”
-
-2.  Push to github
-
-    git push
-
-P.S. It is always good to first run "git pull" first before working on your changes and pushing that into github
+While our client, the lab of Language Technology for Social Good (LT4SG) is responsible for emotional data processing, natural language processing, and artificial intelligence. The NLP algorithm developed by LT4SG identifies the triggers of users "emotions, which allows the app to present the triggered emotions to users to gain a better understanding of the main causes of their emotions.
 
 ## Start and run the backend server
 
