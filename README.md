@@ -5,6 +5,8 @@ MindSpace is a cross-platform app that harnesses the power of NLP to analyze soc
 Our team is responsible for the design and development of the mobile app using the sample data provided by our clients Dr. Thushari Atapattu and Menasha Thilakaratne. We developed functions for users to track emotional data on a weekly and monthly basis, make reflections for specific emotions, and seek strategies to handle emotional problems.
 
 While our client, the lab of Language Technology for Social Good (LT4SG) is responsible for emotional data processing, natural language processing, and artificial intelligence. The NLP algorithm developed by LT4SG identifies the triggers of users "emotions, which allows the app to present the triggered emotions to users to gain a better understanding of the main causes of their emotions.
+![project preview v2](https://user-images.githubusercontent.com/62090279/141150560-49f3dc49-cecf-456c-a448-bd74b3c1b32a.png)
+
 
 ## Start and run the backend server
 
